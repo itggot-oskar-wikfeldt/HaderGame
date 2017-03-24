@@ -26,7 +26,7 @@ public class Loading extends State {
     public void update(double v) {
         timePassed += v;
 
-        if (timePassed > 3)
+        if (timePassed > 3 || true)
             engine.setState(new Game(engine));
 
         counter += v;

@@ -9,7 +9,7 @@ import java.awt.*;
  */
 public class Style {
 
-    public static final UIFont FONT = new UIFont("/arial.ttf", Color.WHITE, true);
+    public static final UIFont FONT = new UIFont("/Abel-Regular.ttf", Color.WHITE, true);
     public static final int BTN_WIDTH = 512;
     public static final int BTN_HEIGHT = 128;
     public static final int BTN_MARGIN = 32;
