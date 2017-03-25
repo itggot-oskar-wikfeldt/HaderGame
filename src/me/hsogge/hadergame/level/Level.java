@@ -11,15 +11,24 @@ public class Level {
     Ball ball;
     Texture texture = new Texture(0xFF000000);
     double[] function = new double[1920];
+    double[] gradient = new double[1920];
 
+    static int functionID = 0;
 
     public Level() {
 
-        ball = new Ball(this, 64, 500);
+        ball = new Ball(this, 150, 500);
 
-        for (int i = 0; i < function.length; i++) {
-            function[i] = 100 * Math.sin((float) i / 100) + 150;
-            //function[i] = -0.01 * (float) Math.pow(i, 2) + 1000;
+        if (functionID == 0) {
+            for (int i = 0; i < function.length; i++) {
+                function[i] = 100 * Math.sin((float) i / 100) + 150;
+                gradient[i] = Math.cos((float) i / 100);
+            }
+        } else {
+            for (int i = 0; i < function.length; i++) {
+                function[i] = Math.pow(2, (double) -0.01 * i + 10);
+                gradient[i] = -7.1 * Math.pow(Math.E, -0.007 * i);
+            }
         }
 
     }
@@ -29,16 +38,22 @@ public class Level {
     }
 
     public void render() {
-
-        ball.render();
-
         for (int i = 0; i < function.length; i++) {
             Renderer.render(texture, i, (float) function[i], 1, (float) -function[i]);
         }
+        ball.render();
     }
 
     public double getHeight(int x) {
         return function[x];
+    }
+
+    public double getGradient(int x) {
+        return gradient[x];
+    }
+
+    public static void setFunctionID(int functionID) {
+        Level.functionID = functionID;
     }
 
 }

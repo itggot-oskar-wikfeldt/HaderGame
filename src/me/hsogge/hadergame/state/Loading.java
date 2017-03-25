@@ -4,6 +4,7 @@ import me.hsogge.hadergame.Style;
 import se.wiklund.haderengine.Engine;
 import se.wiklund.haderengine.State;
 import se.wiklund.haderengine.graphics.Renderer;
+import se.wiklund.haderengine.ui.EnabledUIComponents;
 import se.wiklund.haderengine.ui.UILabel;
 
 /**
@@ -15,6 +16,8 @@ public class Loading extends State {
     UILabel label = new UILabel("loading...", Style.FONT, 64, engine.WIDTH / 2, engine.HEIGHT / 2, true);
 
     public Loading(Engine engine) {
+        EnabledUIComponents.disableAll();
+
         this.engine = engine;
     }
 

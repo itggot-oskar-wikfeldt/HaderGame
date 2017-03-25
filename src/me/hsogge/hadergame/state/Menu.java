@@ -6,6 +6,7 @@ import me.hsogge.hadergame.Style;
 import se.wiklund.haderengine.Engine;
 import se.wiklund.haderengine.State;
 import se.wiklund.haderengine.graphics.Texture;
+import se.wiklund.haderengine.ui.EnabledUIComponents;
 import se.wiklund.haderengine.ui.UIButton;
 import se.wiklund.haderengine.ui.UILabel;
 import se.wiklund.haderengine.ui.listener.UIButtonListener;
@@ -25,6 +26,8 @@ public class Menu extends State {
     UILabel poweredBy = new UILabel("Powered by HaderEngine", Style.FONT, 48, 64, 64, false);
 
     public Menu(Engine engine) {
+        EnabledUIComponents.disableAll();
+
         this.engine = engine;
         int centerX = engine.WIDTH / 2 - BTN_WIDTH/2;
         int centerY = engine.HEIGHT / 2;
@@ -41,7 +44,7 @@ public class Menu extends State {
                 if (uiButton == btnPlay) {
                     engine.setState(new Loading(engine));
                 } else if (uiButton == btnSettings) {
-                    engine.setState(new Settings());
+                    engine.setState(new Settings(engine));
                 } else if (uiButton == btnQuit) {
                     engine.exit();
                 }
@@ -50,8 +53,6 @@ public class Menu extends State {
         btnPlay.addButtonListener(buttonListener);
         btnSettings.addButtonListener(buttonListener);
         btnQuit.addButtonListener(buttonListener);
-
-
     }
 
     @Override
