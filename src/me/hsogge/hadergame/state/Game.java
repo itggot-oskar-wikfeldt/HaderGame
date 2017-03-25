@@ -1,6 +1,5 @@
 package me.hsogge.hadergame.state;
 
-import me.hsogge.hadergame.Style;
 import me.hsogge.hadergame.level.Level;
 import org.lwjgl.glfw.GLFW;
 import org.lwjgl.opengl.GL11;
@@ -8,7 +7,6 @@ import se.wiklund.haderengine.Engine;
 import se.wiklund.haderengine.State;
 import se.wiklund.haderengine.input.Keyboard;
 import se.wiklund.haderengine.ui.EnabledUIComponents;
-import se.wiklund.haderengine.ui.UILabel;
 
 public class Game extends State {
 
