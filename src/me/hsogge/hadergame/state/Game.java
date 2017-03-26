@@ -19,7 +19,7 @@ public class Game extends State {
 
         this.engine = engine;
 
-        level = new Level();
+        level = new Level(engine);
 
     }
 

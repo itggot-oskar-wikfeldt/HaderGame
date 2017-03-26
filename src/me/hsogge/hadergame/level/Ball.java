@@ -10,9 +10,9 @@ import se.wiklund.haderengine.graphics.Texture;
 public class Ball extends Instance {
 
     private final float GRAVITY = -0.1f;
-    private final float ACCELERATION = 0.1f;
-    private final float FRICTION = 0.01f;
-    private final float AIR_RESISTANCE = 0.001f;
+    private final float ACCELERATION = 0.13f;
+    private final float FRICTION = 0.02f;
+    private final float AIR_RESISTANCE = 0.002f;
     private float velY = 0;
     private float velX = 0;
     private float centerX;
@@ -26,6 +26,8 @@ public class Ball extends Instance {
         this.level = level;
     }
 
+    private boolean onGround;
+
     public void update(double delta) {
 
         centerX = getTransform().getX() + getTransform().getWidth() / 2;
@@ -34,14 +36,28 @@ public class Ball extends Instance {
         velY += GRAVITY;
         move(velX, velY);
 
-        if (getTransform().getY() < level.getHeight((int) centerX)) {
+        onGround = getTransform().getY() < level.getHeight((int) centerX);
+
+        if (onGround) {
             velX += ACCELERATION * -level.getGradient((int) centerX);
             velX = Util.decrement(velX, FRICTION);
-            velY = 0;
+            double velYFactor = -Math.abs(level.getGradient((int) centerX)) + 1;
+            if (velYFactor < 0)
+                velYFactor = 0;
+            velY -= velY * velYFactor;
             getTransform().setY((float) level.getHeight((int) centerX));
         } else {
             velX = Util.decrement(velX, AIR_RESISTANCE);
         }
+    }
+
+    public void setPos(float x, float y) {
+        getTransform().setPosition(x, y);
+    }
+
+    public void stop() {
+        velX = 0;
+        velY = 0;
     }
 
 }

@@ -1,7 +1,11 @@
 package me.hsogge.hadergame.level;
 
+import se.wiklund.haderengine.Engine;
 import se.wiklund.haderengine.graphics.Renderer;
 import se.wiklund.haderengine.graphics.Texture;
+import se.wiklund.haderengine.input.Cursor;
+import se.wiklund.haderengine.input.Mouse;
+import se.wiklund.haderengine.input.MouseButtonListener;
 
 /**
  * Created by bolle on 2017-03-24.
@@ -13,27 +17,47 @@ public class Level {
     double[] function = new double[1920];
     double[] gradient = new double[1920];
 
+    MouseButtonListener mouseButtonListener;
+
+    Engine engine;
+
     static int functionID = 0;
 
-    public Level() {
+    public Level(Engine engine) {
 
-        ball = new Ball(this, 150, 500);
+        this.engine = engine;
 
-        if (functionID == 0) {
-            for (int i = 0; i < function.length; i++) {
-                function[i] = 100 * Math.sin((float) i / 100) + 150;
-                gradient[i] = Math.cos((float) i / 100);
-            }
-        } else {
-            for (int i = 0; i < function.length; i++) {
-                function[i] = Math.pow(2, (double) -0.01 * i + 10);
-                gradient[i] = -7.1 * Math.pow(Math.E, -0.007 * i);
-            }
+        ball = new Ball(this, 70, 1000);
+
+        for (int i = 0; i < function.length / 2; i++) {
+            function[i] = Math.pow(2, (double) -0.01 * i + 10) + 150;
+            gradient[i] = -7.1 * Math.pow(Math.E, -0.007 * i);
         }
+
+        for (int i = function.length / 2; i < function.length; i++) {
+            function[i] = 150 * Math.cos((float) i / 100) + 200;
+            gradient[i] = -1.5 * Math.sin((float) i / 100);
+        }
+
+        mouseButtonListener = new MouseButtonListener() {
+            @Override
+            public void onMouseButtonDown(int i) {
+            }
+
+            @Override
+            public void onMouseButtonUp(int i) {
+                ball.setPos(Cursor.getTransform().getX(), Cursor.getTransform().getY());
+                ball.stop();
+            }
+        };
+
+        Mouse.addMouseButtonListener(mouseButtonListener);
 
     }
 
     public void update(double delta) {
+
+
         ball.update(delta);
     }
 
