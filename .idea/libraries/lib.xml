@@ -1,10 +1,15 @@
 <component name="libraryTable">
   <library name="lib">
     <CLASSES>
-      <root url="file://$PROJECT_DIR$/lib" />
+      <root url="jar://$PROJECT_DIR$/lib/HaderEngine.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/lwjgl-opengl.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/lwjgl-opengl-natives-windows.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/lwjgl.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/lwjgl-glfw-natives-windows.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/lwjgl-natives-windows.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/lwjgl-glfw.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
-    <jarDirectory url="file://$PROJECT_DIR$/lib" recursive="false" />
   </library>
 </component>
