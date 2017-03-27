@@ -17,9 +17,9 @@ public class Vector2f {
         return d < circle.getRadius();
     }
 
-    public void move(float d, float angle) {
-        x += d * Math.cos(angle);
-        y += d * Math.sin(angle);
+    public void move(float dx, float dy) {
+        x += dx;
+        y += dy;
     }
 
     public double magnitude() {

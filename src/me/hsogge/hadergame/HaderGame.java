@@ -14,7 +14,7 @@ public class HaderGame {
     public static Engine engine;
 
     public static void main(String[] args) {
-        engine = new Engine("HaderGame", false, true);
+        engine = new Engine("HaderGame", false, false);
         engine.setState(new Menu(engine));
         engine.start();
     }
