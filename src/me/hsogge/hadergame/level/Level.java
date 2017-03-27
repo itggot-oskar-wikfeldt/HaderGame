@@ -12,7 +12,8 @@ import se.wiklund.haderengine.input.MouseButtonListener;
  */
 public class Level {
 
-    Ball ball;
+    //Ball ball;
+    Ball2 ball2;
     Texture texture = new Texture(0xFF000000);
     double[] function = new double[1920];
     double[] gradient = new double[1920];
@@ -27,7 +28,8 @@ public class Level {
 
         this.engine = engine;
 
-        ball = new Ball(this, 70, 1000);
+        //ball = new Ball(this, 70, 1000);
+        ball2 = new Ball2(this, 70, 1000);
 
         for (int i = 0; i < function.length / 2; i++) {
             function[i] = Math.pow(2, (double) -0.01 * i + 10) + 150;
@@ -46,8 +48,10 @@ public class Level {
 
             @Override
             public void onMouseButtonUp(int i) {
-                ball.setPos(Cursor.getTransform().getX(), Cursor.getTransform().getY());
-                ball.stop();
+                //ball.setPos(Cursor.getTransform().getX(), Cursor.getTransform().getY());
+                //ball.stop();
+                ball2.setPosition(Cursor.getTransform().getX(), Cursor.getTransform().getY());
+                ball2.stop();
             }
         };
 
@@ -58,14 +62,16 @@ public class Level {
     public void update(double delta) {
 
 
-        ball.update(delta);
+        //ball.update(delta);
+        ball2.update(delta);
     }
 
     public void render() {
         for (int i = 0; i < function.length; i++) {
             Renderer.render(texture, i, (float) function[i], 1, (float) -function[i]);
         }
-        ball.render();
+        //ball.render();
+        ball2.render();
     }
 
     public double getHeight(int x) {
