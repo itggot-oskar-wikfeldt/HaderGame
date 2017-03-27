@@ -21,7 +21,11 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="680">
               <caret line="42" column="39" lean-forward="false" selection-start-line="42" selection-start-column="39" selection-end-line="42" selection-end-column="39" />
-              <folding />
+              <folding>
+                <element signature="imports" expanded="false" />
+                <element signature="e#1725#1726#0" expanded="false" />
+                <element signature="e#1773#1774#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -29,12 +33,36 @@
       <file leaf-file-name="Ball2.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/me/hsogge/hadergame/level/Ball2.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="58" column="115" lean-forward="false" selection-start-line="58" selection-start-column="115" selection-end-line="58" selection-end-column="115" />
+            <state relative-caret-position="408">
+              <caret line="74" column="139" lean-forward="false" selection-start-line="74" selection-start-column="139" selection-end-line="74" selection-end-column="139" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#1539#1540#0" expanded="true" />
-                <element signature="e#1610#1611#0" expanded="true" />
+                <element signature="e#1922#1923#0" expanded="true" />
+                <element signature="e#1993#1994#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Vector3f.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/me/hsogge/hadergame/math/Vector3f.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="478">
+              <caret line="40" column="31" lean-forward="false" selection-start-line="40" selection-start-column="31" selection-end-line="40" selection-end-column="31" />
+              <folding>
+                <element signature="e#480#481#0" expanded="true" />
+                <element signature="e#511#512#0" expanded="true" />
+                <element signature="e#538#539#0" expanded="true" />
+                <element signature="e#562#563#0" expanded="true" />
+                <element signature="e#589#590#0" expanded="true" />
+                <element signature="e#613#614#0" expanded="true" />
+                <element signature="e#640#641#0" expanded="true" />
+                <element signature="e#664#665#0" expanded="true" />
+                <element signature="e#723#724#0" expanded="true" />
+                <element signature="e#756#757#0" expanded="true" />
+                <element signature="e#782#783#0" expanded="true" />
+                <element signature="e#815#816#0" expanded="true" />
+                <element signature="e#841#842#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -66,8 +94,8 @@
       <file leaf-file-name="Vector2f.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/me/hsogge/hadergame/math/Vector2f.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="35" column="38" lean-forward="false" selection-start-line="35" selection-start-column="38" selection-end-line="35" selection-end-column="38" />
+            <state relative-caret-position="527">
+              <caret line="32" column="0" lean-forward="true" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
               <folding>
                 <element signature="e#594#595#0" expanded="true" />
                 <element signature="e#659#660#0" expanded="true" />
@@ -138,6 +166,7 @@
         <option value="$PROJECT_DIR$/src/me/hsogge/hadergame/math/Circle.java" />
         <option value="$PROJECT_DIR$/src/me/hsogge/hadergame/math/Vector2f.java" />
         <option value="$PROJECT_DIR$/src/me/hsogge/hadergame/level/Level.java" />
+        <option value="$PROJECT_DIR$/src/me/hsogge/hadergame/math/Vector3f.java" />
         <option value="$PROJECT_DIR$/src/me/hsogge/hadergame/level/Ball2.java" />
       </list>
     </option>
@@ -609,7 +638,11 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="714">
           <caret line="42" column="39" lean-forward="false" selection-start-line="42" selection-start-column="39" selection-end-line="42" selection-end-column="39" />
-          <folding />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#1725#1726#0" expanded="false" />
+            <element signature="e#1773#1774#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -619,8 +652,8 @@
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1539#1540#0" expanded="true" />
-            <element signature="e#1610#1611#0" expanded="true" />
+            <element signature="e#1922#1923#0" expanded="true" />
+            <element signature="e#1993#1994#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -681,7 +714,11 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="680">
           <caret line="42" column="39" lean-forward="false" selection-start-line="42" selection-start-column="39" selection-end-line="42" selection-end-column="39" />
-          <folding />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#1725#1726#0" expanded="false" />
+            <element signature="e#1773#1774#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -691,8 +728,8 @@
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1539#1540#0" expanded="true" />
-            <element signature="e#1610#1611#0" expanded="true" />
+            <element signature="e#1922#1923#0" expanded="true" />
+            <element signature="e#1993#1994#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -727,7 +764,11 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="425">
           <caret line="27" column="0" lean-forward="false" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#1725#1726#0" expanded="false" />
+            <element signature="e#1773#1774#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -751,7 +792,11 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="680">
           <caret line="42" column="39" lean-forward="false" selection-start-line="42" selection-start-column="39" selection-end-line="42" selection-end-column="39" />
-          <folding />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#1725#1726#0" expanded="false" />
+            <element signature="e#1773#1774#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -799,10 +844,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/me/hsogge/hadergame/level/Level.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="31" column="35" lean-forward="false" selection-start-line="31" selection-start-column="35" selection-end-line="31" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/me/hsogge/hadergame/math/Vector2f.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="35" column="38" lean-forward="false" selection-start-line="35" selection-start-column="38" selection-end-line="35" selection-end-column="38" />
+        <state relative-caret-position="527">
+          <caret line="32" column="0" lean-forward="true" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
           <folding>
             <element signature="e#594#595#0" expanded="true" />
             <element signature="e#659#660#0" expanded="true" />
@@ -814,22 +867,36 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/me/hsogge/hadergame/level/Level.java">
+    <entry file="file://$PROJECT_DIR$/src/me/hsogge/hadergame/math/Vector3f.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="31" column="35" lean-forward="false" selection-start-line="31" selection-start-column="35" selection-end-line="31" selection-end-column="35" />
-          <folding />
+        <state relative-caret-position="478">
+          <caret line="40" column="31" lean-forward="false" selection-start-line="40" selection-start-column="31" selection-end-line="40" selection-end-column="31" />
+          <folding>
+            <element signature="e#480#481#0" expanded="true" />
+            <element signature="e#511#512#0" expanded="true" />
+            <element signature="e#538#539#0" expanded="true" />
+            <element signature="e#562#563#0" expanded="true" />
+            <element signature="e#589#590#0" expanded="true" />
+            <element signature="e#613#614#0" expanded="true" />
+            <element signature="e#640#641#0" expanded="true" />
+            <element signature="e#664#665#0" expanded="true" />
+            <element signature="e#723#724#0" expanded="true" />
+            <element signature="e#756#757#0" expanded="true" />
+            <element signature="e#782#783#0" expanded="true" />
+            <element signature="e#815#816#0" expanded="true" />
+            <element signature="e#841#842#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/me/hsogge/hadergame/level/Ball2.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="58" column="115" lean-forward="false" selection-start-line="58" selection-start-column="115" selection-end-line="58" selection-end-column="115" />
+        <state relative-caret-position="408">
+          <caret line="74" column="139" lean-forward="false" selection-start-line="74" selection-start-column="139" selection-end-line="74" selection-end-column="139" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1539#1540#0" expanded="true" />
-            <element signature="e#1610#1611#0" expanded="true" />
+            <element signature="e#1922#1923#0" expanded="true" />
+            <element signature="e#1993#1994#0" expanded="true" />
           </folding>
         </state>
       </provider>

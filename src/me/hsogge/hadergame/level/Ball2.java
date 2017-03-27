@@ -2,9 +2,12 @@ package me.hsogge.hadergame.level;
 
 import me.hsogge.hadergame.math.Circle;
 import me.hsogge.hadergame.math.Vector2f;
+import me.hsogge.hadergame.math.Vector3f;
 import se.wiklund.haderengine.Instance;
 import se.wiklund.haderengine.graphics.Texture;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -49,18 +52,27 @@ public class Ball2 extends Instance {
     }
 
     private void checkCollision() {
-        for (int x = (int) (position.getX() - width / 2); x < position.getX() + width / 2; x++) {
-            Vector2f point = new Vector2f(x, (int) level.getHeight(x));
 
-            if (point.intersects(circle)) {
+        List<Vector3f> points = new ArrayList<>();
+
+        //for (int x = (int) (position.getX() - width / 2); x < position.getX() + width / 2; x++) {
+        for (int x = (int) (position.getX() + width / 2); x > position.getX() - width / 2; x--) {
+            Vector3f point = new Vector3f(x, (int) level.getHeight(x), 0);
+
+            if (point.getVector2f().intersects(circle)) {
 
                 double angle = Math.atan(level.getGradient((int) point.getX()));
 
-                setPosition((float) (point.getX() + (width/2) * -Math.sin(angle)), (float) (point.getY() + (width/2) * Math.cos(angle)));
+                point.setZ((float) angle);
 
-                break;
+                points.add(point);
+
             }
         }
+
+        Vector3f point = points.get(points.size() / 2);
+
+        setPosition((float) (point.getX() + (width/2) * -Math.sin(point.getZ())), (float) (point.getY() + (width/2) * Math.cos(point.getZ())));
 
     }
 
