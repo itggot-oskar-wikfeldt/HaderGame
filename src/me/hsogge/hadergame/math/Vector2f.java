@@ -13,7 +13,8 @@ public class Vector2f {
     }
 
     public boolean intersects(Circle circle) {
-        return Math.sqrt(Math.pow((x - circle.getPosition().getX()), 2) + Math.pow((y - circle.getPosition().getY()), 2)) < circle.getRadius();
+        double d = Math.sqrt(Math.pow((x - circle.getPosition().getX()), 2) + Math.pow((y - circle.getPosition().getY()), 2));
+        return d < circle.getRadius();
     }
 
     public void move(float d, float angle) {
@@ -32,9 +33,9 @@ public class Vector2f {
 
     }
 
-    public void setPos(double x, double y) {
-        this.x = (float) x;
-        this.y = (float) y;
+    public void setPos(float x, float y) {
+        this.x = x;
+        this.y = y;
     }
 
     public float getX() {

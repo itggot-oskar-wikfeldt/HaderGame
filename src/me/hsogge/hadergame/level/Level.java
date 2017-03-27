@@ -29,7 +29,7 @@ public class Level {
         this.engine = engine;
 
         //ball = new Ball(this, 70, 1000);
-        ball2 = new Ball2(this, 70, 1000);
+        ball2 = new Ball2(this, 150, 1000);
 
         for (int i = 0; i < function.length / 2; i++) {
             function[i] = Math.pow(2, (double) -0.01 * i + 10) + 150;

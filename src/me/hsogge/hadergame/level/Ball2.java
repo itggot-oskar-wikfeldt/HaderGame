@@ -37,6 +37,9 @@ public class Ball2 extends Instance {
 
     public void update(double delta) {
 
+        shift(0, -2.0f);
+
+
         circle.getPosition().setPos(position.getX(), position.getY());
 
 
@@ -53,12 +56,16 @@ public class Ball2 extends Instance {
 
                 double angle = Math.atan(level.getGradient((int) point.getX()));
 
-                position.setPos(point.getX() + (width/2) * Math.cos(angle), point.getY() + (width/2) * Math.sin(angle));
+                setPosition((float) (point.getX() + (width/2) * -Math.sin(angle)), (float) (point.getY() + (width/2) * Math.cos(angle)));
 
                 break;
             }
         }
 
+    }
+
+    public void shift(float dx, float dy) {
+        setPosition(position.getX() + dx, position.getY() + dy);
     }
 
     public void setPosition(float x, float y) {
