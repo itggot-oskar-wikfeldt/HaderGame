@@ -24,13 +24,13 @@ public class Game extends State {
     }
 
     @Override
-    public void update(double v) {
+    public void update(double delta) {
 
         if (Keyboard.isKeyPressed(GLFW.GLFW_KEY_ESCAPE)) {
             engine.setState(new Menu(engine));
         }
 
-        level.update(v);
+        level.update(delta);
     }
 
     @Override
