@@ -2,6 +2,7 @@ package me.hsogge.hadergame;
 
 import java.awt.Color;
 
+import me.hsogge.hadergame.state.Game;
 import me.hsogge.hadergame.state.Menu;
 import se.wiklund.haderengine.Engine;
 import se.wiklund.haderengine.ui.UIFont;
@@ -15,7 +16,7 @@ public class HaderGame {
 
     public static void main(String[] args) {
         engine = new Engine("HaderGame", false, false);
-        engine.setState(new Menu(engine));
+        engine.setState(new Game(engine));
         engine.start();
     }
 }

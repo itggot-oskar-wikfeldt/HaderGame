@@ -63,6 +63,7 @@ public class Ball2 extends Instance {
 
         } else {
 
+
             float dx = AIR_RESISTANCE;
             float angle = 0;
 
@@ -77,11 +78,13 @@ public class Ball2 extends Instance {
             applyForce((float) (dx * delta), angle);
 
         }
+/*
 
         System.out.println("velx: " + vel.getX());
         System.out.println("vely: " + vel.getY());
         System.out.println("------------");
 
+*/
 
     }
 
@@ -101,6 +104,8 @@ public class Ball2 extends Instance {
             Vector3f point = new Vector3f(x, (int) level.getHeight(x), 0);
 
             if (point.getVector2f().intersects(circle)) {
+
+                //stop();
 
                 onGround = true;
 
