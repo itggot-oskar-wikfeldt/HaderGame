@@ -50,34 +50,6 @@ public class Ball2 extends Instance {
 
         Vector3f point = checkCollision();
 
-        if (onGround) {
-
-            float angle = (float) -(point.getZ() - Math.PI / 2);
-
-            float force = (float) (GRAVITY * Math.sin(angle) * delta);
-
-            force -= FRICTION * delta;
-
-            applyForce(force, point.getZ());
-
-
-        } else {
-
-
-            float dx = AIR_RESISTANCE;
-            float angle = 0;
-
-            if (vel.getX() < 0)
-                angle = 0;
-            else if (vel.getX() > 0)
-                angle = (float) Math.PI;
-            else
-                dx = 0;
-
-            applyForce((float) (GRAVITY * delta), -Math.PI / 2);
-            applyForce((float) (dx * delta), angle);
-
-        }
 /*
 
         System.out.println("velx: " + vel.getX());
@@ -104,8 +76,6 @@ public class Ball2 extends Instance {
             Vector3f point = new Vector3f(x, (int) level.getHeight(x), 0);
 
             if (point.getVector2f().intersects(circle)) {
-
-                //stop();
 
                 onGround = true;
 

@@ -34,7 +34,7 @@ public class Ball extends Instance {
         centerY = getTransform().getY() + getTransform().getHeight() / 2;
 
         velY += GRAVITY;
-        move(velX, velY);
+        getTransform().move(velX, velY);
 
         onGround = getTransform().getY() < level.getHeight((int) centerX);
 

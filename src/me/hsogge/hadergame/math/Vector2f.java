@@ -38,6 +38,13 @@ public class Vector2f {
         this.y = y;
     }
 
+    public void rotate(Double angle) {
+        double sin = Math.sin(angle);
+        double cos = Math.cos(angle);
+        this.x = (float) (cos * x - sin * y);
+        this.y = (float) (sin * y - cos * x);
+    }
+
     public float getX() {
         return x;
     }
