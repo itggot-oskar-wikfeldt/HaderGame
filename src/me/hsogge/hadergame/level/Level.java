@@ -1,11 +1,14 @@
 package me.hsogge.hadergame.level;
 
+import me.hsogge.hadergame.math.Vector2f;
 import se.wiklund.haderengine.Engine;
 import se.wiklund.haderengine.graphics.Renderer;
 import se.wiklund.haderengine.graphics.Texture;
 import se.wiklund.haderengine.input.Cursor;
 import se.wiklund.haderengine.input.Mouse;
 import se.wiklund.haderengine.input.MouseButtonListener;
+
+import java.util.Vector;
 
 /**
  * Created by bolle on 2017-03-24.
@@ -22,9 +25,13 @@ public class Level {
 
     Engine engine;
 
+    boolean mouseIsDown;
+
     static int functionID = 0;
 
     public Level(Engine engine) {
+
+
 
         this.engine = engine;
 
@@ -44,14 +51,15 @@ public class Level {
         mouseButtonListener = new MouseButtonListener() {
             @Override
             public void onMouseButtonDown(int i) {
+                mouseIsDown = true;
+
             }
 
             @Override
             public void onMouseButtonUp(int i) {
-                //ball.setPos(Cursor.getTransform().getX(), Cursor.getTransform().getY());
-                //ball.stop();
-                ball2.setPosition(Cursor.getTransform().getX(), Cursor.getTransform().getY());
-                ball2.stop();
+
+                mouseIsDown = false;
+
             }
         };
 
@@ -60,6 +68,13 @@ public class Level {
     }
 
     public void update(double delta) {
+
+        if (mouseIsDown) {
+            //ball.setPos(Cursor.getTransform().getX(), Cursor.getTransform().getY());
+            //ball.stop();
+            ball2.setPosition(Cursor.getTransform().getX(), Cursor.getTransform().getY());
+            ball2.stop();
+        }
 
 
         //ball.update(delta);

@@ -38,11 +38,24 @@ public class Vector2f {
         this.y = y;
     }
 
-    public void rotate(Double angle) {
+    public void rotate(double angle) {
         double sin = Math.sin(angle);
         double cos = Math.cos(angle);
-        this.x = (float) (cos * x - sin * y);
-        this.y = (float) (sin * y - cos * x);
+        float newX = (float) (cos * x - sin * y);
+        float newY = (float) (sin * x + cos * y);
+        x = newX;
+        y = newY;
+    }
+
+    public void setAngle(double angle) {
+        rotate(angle - getAngle());
+    }
+
+    public double getAngle() {
+        if (x > 0)
+            return Math.atan(y / x);
+        else
+            return Math.PI + Math.atan(y / x);
     }
 
     public float getX() {
@@ -51,5 +64,13 @@ public class Vector2f {
 
     public float getY() {
         return y;
+    }
+
+    public void setX(float x) {
+        this.x = x;
+    }
+
+    public void setY(float y) {
+        this.y = y;
     }
 }

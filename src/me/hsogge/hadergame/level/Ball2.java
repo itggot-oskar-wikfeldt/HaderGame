@@ -3,6 +3,7 @@ package me.hsogge.hadergame.level;
 import me.hsogge.hadergame.math.Circle;
 import me.hsogge.hadergame.math.Vector2f;
 import me.hsogge.hadergame.math.Vector3f;
+import me.hsogge.hadergame.util.Util;
 import se.wiklund.haderengine.Instance;
 import se.wiklund.haderengine.graphics.Texture;
 
@@ -24,7 +25,7 @@ public class Ball2 extends Instance {
     private final float FRICTION = 100;
     private final float AIR_RESISTANCE = 50;
 
-    private Vector2f vel = new Vector2f(0,0);
+    private Vector2f vel = new Vector2f(0, 0);
 
     private boolean onGround;
 
@@ -47,9 +48,29 @@ public class Ball2 extends Instance {
 
         circle.getPosition().setPos(position.getX(), position.getY());
 
-
         Vector3f point = checkCollision();
 
+
+        if (point != null) {
+            //setPosition((float) (point.getX() + (width / 2) * Math.cos(point.getZ())), (float) (point.getY() + (width / 2) * Math.sin(point.getZ())));
+            float force = (float) ((float) Math.sin(point.getZ()) * -GRAVITY*delta);
+            if (force > 0)
+                force -= FRICTION * delta;
+            else
+                force += FRICTION * delta;
+            applyForce(force, point.getZ());
+
+            if (vel.getY() > vel.getX())
+                vel.setY((float) Math.tan(point.getZ()) * vel.getX());
+            else {
+                float oldVel = vel.getX();
+                vel.setX((float) (vel.getY() / Math.tan(point.getZ())));
+                System.out.println(oldVel - vel.getX());
+            }
+        } else {
+            vel.move(0, (float) (-GRAVITY * delta));
+
+        }
 /*
 
         System.out.println("velx: " + vel.getX());
@@ -79,7 +100,7 @@ public class Ball2 extends Instance {
 
                 onGround = true;
 
-                double angle = Math.atan(level.getGradient((int) point.getX())) + Math.PI / 2;
+                double angle = Math.atan(level.getGradient((int) point.getX()));
 
                 point.setZ((float) angle);
 
@@ -89,8 +110,6 @@ public class Ball2 extends Instance {
         }
         if (!points.isEmpty()) {
             Vector3f point = points.get(points.size() / 2);
-
-            setPosition((float) (point.getX() + (width / 2) * Math.cos(point.getZ())), (float) (point.getY() + (width / 2) * Math.sin(point.getZ())));
 
             return point;
         }
