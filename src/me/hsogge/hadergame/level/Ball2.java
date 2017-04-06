@@ -53,16 +53,39 @@ public class Ball2 extends Instance {
 
         if (point != null) {
             //setPosition((float) (point.getX() + (width / 2) * Math.cos(point.getZ())), (float) (point.getY() + (width / 2) * Math.sin(point.getZ())));
-            float force = Math.abs((float) (Math.sin(point.getZ()) * -GRAVITY*delta));
-            applyForce(force, point.getZ());
-
-            if (vel.getY() > vel.getX())
+/*
+            if (Math.abs(Math.tan(point.getZ()) * vel.getX()) < Math.abs(vel.getY()))
                 vel.setY((float) Math.tan(point.getZ()) * vel.getX());
             else {
-                float oldVel = vel.getX();
                 vel.setX((float) (vel.getY() / Math.tan(point.getZ())));
-                System.out.println(oldVel - vel.getX());
             }
+*/
+
+            //vel.setAngle(point.getZ());
+
+            vel.setAngle(-1.1127044);
+
+            System.out.println(point.getZ());
+            System.out.println(vel.getAngle());
+
+            System.out.println(point.getZ() - vel.getAngle());
+            System.out.println((-vel.getY() * Math.sin(point.getZ() - vel.getAngle())));
+            System.out.println("--");
+
+            applyForce((float) (-vel.getY() * Math.sin(point.getZ() - vel.getAngle()) * delta), point.getZ());
+
+
+
+/*
+            float force = Math.abs((float) (Math.sin(point.getZ()) * -GRAVITY * delta));
+
+            if (point.getZ() < 0) {
+                applyForce(force, point.getZ());
+            }
+            else {
+                applyForce(-force, point.getZ());
+            }
+            */
         } else {
             vel.move(0, (float) (-GRAVITY * delta));
 
