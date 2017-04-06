@@ -53,11 +53,7 @@ public class Ball2 extends Instance {
 
         if (point != null) {
             //setPosition((float) (point.getX() + (width / 2) * Math.cos(point.getZ())), (float) (point.getY() + (width / 2) * Math.sin(point.getZ())));
-            float force = (float) ((float) Math.sin(point.getZ()) * -GRAVITY*delta);
-            if (force > 0)
-                force -= FRICTION * delta;
-            else
-                force += FRICTION * delta;
+            float force = Math.abs((float) (Math.sin(point.getZ()) * -GRAVITY*delta));
             applyForce(force, point.getZ());
 
             if (vel.getY() > vel.getX())
