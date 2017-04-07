@@ -44,9 +44,16 @@ public class Vector2f {
         y += Math.sin(angle) * dl;
     }
 
-    public void add(Vector2f vector) {
-        x += vector.getX();
-        y += vector.getY();
+    public Vector2f scale(double scale) {
+        return new Vector2f((float) (x * scale), (float) y * scale);
+    }
+
+    public Vector2f add(Vector2f vector) {
+        return new Vector2f(x + vector.getX(), y + vector.getY());
+    }
+
+    public Vector2f subtract(Vector2f vector) {
+        return new Vector2f(x - vector.getX(), y - vector.getY());
     }
 
     public void setPos(float x, float y) {

@@ -3,6 +3,7 @@ package me.hsogge.hadergame.state;
 import static me.hsogge.hadergame.Style.*;
 
 import me.hsogge.hadergame.Style;
+import org.lwjgl.opengl.GL11;
 import se.wiklund.haderengine.Engine;
 import se.wiklund.haderengine.State;
 import se.wiklund.haderengine.graphics.Texture;
@@ -22,8 +23,8 @@ public class Menu extends State {
     UIButton btnSettings;
     UIButton btnQuit;
 
-    UILabel title = new UILabel("hsogge game", Style.FONT, 128, engine.WIDTH / 2, engine.HEIGHT - 128, true);
-    UILabel poweredBy = new UILabel("Powered by HaderEngine", Style.FONT, 48, 64, 64, false);
+    UILabel title = new UILabel("hsogge game", Style.FONT_BLACK, 128, engine.WIDTH / 2, engine.HEIGHT - 128, true);
+    UILabel poweredBy = new UILabel("Powered by HaderEngine", Style.FONT_BLACK, 48, 64, 64, false);
 
     public Menu(Engine engine) {
         EnabledUIComponents.disableAll();
@@ -31,9 +32,9 @@ public class Menu extends State {
         this.engine = engine;
         int centerX = engine.WIDTH / 2 - BTN_WIDTH/2;
         int centerY = engine.HEIGHT / 2;
-        btnPlay = new UIButton("Play", FONT, 48, new Texture(0xFFa98805), centerX, centerY + BTN_HEIGHT/2 + BTN_MARGIN, BTN_WIDTH, BTN_HEIGHT);
+        btnPlay = new UIButton("Play", FONT, 48, new Texture(0xFF05a937), centerX, centerY + BTN_HEIGHT/2 + BTN_MARGIN, BTN_WIDTH, BTN_HEIGHT);
         btnSettings = new UIButton("Settings", FONT, 48, new Texture(0xFF0588a9), centerX, centerY - BTN_HEIGHT/2, BTN_WIDTH, BTN_HEIGHT);
-        btnQuit = new UIButton("Quit", FONT, 48, new Texture(0xFF0588a9), centerX, centerY - BTN_HEIGHT/2 - BTN_MARGIN - BTN_HEIGHT, BTN_WIDTH, BTN_HEIGHT);
+        btnQuit = new UIButton("Quit", FONT, 48, new Texture(0xFFa90505), centerX, centerY - BTN_HEIGHT/2 - BTN_MARGIN - BTN_HEIGHT, BTN_WIDTH, BTN_HEIGHT);
         buttonListener = new UIButtonListener() {
             @Override
             public void onButtonDown(UIButton uiButton, int i) {
@@ -67,6 +68,7 @@ public class Menu extends State {
 
     @Override
     public void render() {
+        GL11.glClearColor(1,1,1,1);
         btnPlay.render();
         btnSettings.render();
         btnQuit.render();

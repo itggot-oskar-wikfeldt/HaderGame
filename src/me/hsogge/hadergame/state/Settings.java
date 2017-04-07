@@ -1,5 +1,7 @@
 package me.hsogge.hadergame.state;
 
+import me.hsogge.hadergame.component.TextInput;
+import me.hsogge.hadergame.component.TextInputListener;
 import me.hsogge.hadergame.level.Level;
 import se.wiklund.haderengine.Engine;
 import se.wiklund.haderengine.State;
@@ -16,24 +18,34 @@ import static me.hsogge.hadergame.Style.*;
 public class Settings extends State {
 
     Engine engine;
-
-    UIButton buttonSin;
-    UIButton buttonOther;
     UIButton buttonBack;
+    TextInput funcInput;
+    TextInput gradInput;
 
     UIButtonListener buttonListener;
+
+    public static String function = "1080 * pow(0.995, x) + 230";
+    public static String gradient = "1080 * log(0.995) * pow(0.995, x)";
 
     public Settings(Engine engine) {
         EnabledUIComponents.disableAll();
 
         this.engine = engine;
 
-        int centerX = engine.WIDTH / 2 - BTN_WIDTH/2;
-        int centerY = engine.HEIGHT / 2;
-        buttonSin = new UIButton("y = 100 * sin(x / 100) + 150", FONT, 48, new Texture(0xFFa98805), centerX, centerY + BTN_HEIGHT/2 + BTN_MARGIN, BTN_WIDTH, BTN_HEIGHT);
-        buttonOther = new UIButton("y = 2 ^ (-0.01x + 10)", FONT, 48, new Texture(0xFF0588a9), centerX, centerY - BTN_HEIGHT/2, BTN_WIDTH, BTN_HEIGHT);
-        buttonBack = new UIButton("Back", FONT, 48, new Texture(0xFF0588a9), centerX, centerY - BTN_HEIGHT/2 - BTN_MARGIN - BTN_HEIGHT, BTN_WIDTH, BTN_HEIGHT);
+        int centerX = engine.WIDTH / 2 - BTN_WIDTH / 2;
+        int numOfButtons = 3;
+        int startY = engine.HEIGHT / 2 + (numOfButtons * BTN_HEIGHT / 2 + (numOfButtons-1)*BTN_MARGIN/2);
 
+        funcInput = new TextInput(function, FONT, 48, new Texture(0xFF0588a9), centerX, startY-BTN_HEIGHT, BTN_WIDTH, BTN_HEIGHT);
+        gradInput = new TextInput(gradient, FONT, 48, new Texture(0xFF0588a9), centerX, startY - (BTN_HEIGHT + BTN_MARGIN)-BTN_HEIGHT, BTN_WIDTH, BTN_HEIGHT);
+        TextInputListener textInputListener = textInput -> {
+            if (textInput == funcInput)
+                function = funcInput.getText();
+            else if (textInput == gradInput)
+                gradient = gradInput.getText();
+        };
+
+        buttonBack = new UIButton("Back", FONT, 48, new Texture(0xFFa90505), centerX, startY - 2*(BTN_HEIGHT + BTN_MARGIN)-BTN_HEIGHT, BTN_WIDTH, BTN_HEIGHT);
 
         buttonListener = new UIButtonListener() {
             @Override
@@ -43,32 +55,36 @@ public class Settings extends State {
 
             @Override
             public void onButtonUp(UIButton uiButton, int i) {
-                if (uiButton == buttonSin) {
-                    Level.setFunctionID(0);
-                } else if (uiButton == buttonOther) {
-                    Level.setFunctionID(1);
-                } else if (uiButton == buttonBack) {
+                funcInput.deselect();
+                gradInput.deselect();
+                if (uiButton == buttonBack) {
                     engine.setState(new Menu(engine));
+                } else if (uiButton == funcInput) {
+                    funcInput.select();
+                } else if (uiButton == gradInput) {
+                    gradInput.select();
                 }
             }
         };
-        buttonSin.addButtonListener(buttonListener);
-        buttonOther.addButtonListener(buttonListener);
         buttonBack.addButtonListener(buttonListener);
+        funcInput.addButtonListener(buttonListener);
+        gradInput.addButtonListener(buttonListener);
+        funcInput.setListener(textInputListener);
+        gradInput.setListener(textInputListener);
 
     }
 
     @Override
     public void update(double v) {
-        buttonSin.update(v);
-        buttonOther.update(v);
         buttonBack.update(v);
+        funcInput.update(v);
+        gradInput.update(v);
     }
 
     @Override
     public void render() {
-        buttonSin.render();
-        buttonOther.render();
         buttonBack.render();
+        funcInput.render();
+        gradInput.render();
     }
 }
