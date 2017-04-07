@@ -12,6 +12,11 @@ public class Vector2f {
         this.y = y;
     }
 
+    public Vector2f(float length, double angle) {
+        x = (float) Math.cos(angle) * length;
+        y = (float) Math.sin(angle) * length;
+    }
+
     public boolean intersects(Circle circle) {
         double d = Math.sqrt(Math.pow((x - circle.getPosition().getX()), 2) + Math.pow((y - circle.getPosition().getY()), 2));
         return d < circle.getRadius();
@@ -31,6 +36,17 @@ public class Vector2f {
 
         setPos((float) (x / magnitude), (float) (y / magnitude));
 
+    }
+
+    public void resize(float dl) {
+        double angle = getAngle();
+        x += Math.cos(angle) * dl;
+        y += Math.sin(angle) * dl;
+    }
+
+    public void add(Vector2f vector) {
+        x += vector.getX();
+        y += vector.getY();
     }
 
     public void setPos(float x, float y) {

@@ -4,8 +4,10 @@ import me.hsogge.hadergame.math.Circle;
 import me.hsogge.hadergame.math.Vector2f;
 import me.hsogge.hadergame.math.Vector3f;
 import me.hsogge.hadergame.util.Util;
+import org.lwjgl.glfw.GLFW;
 import se.wiklund.haderengine.Instance;
 import se.wiklund.haderengine.graphics.Texture;
+import se.wiklund.haderengine.input.Keyboard;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +24,7 @@ public class Ball2 extends Instance {
     private Circle circle;
 
     private final float GRAVITY = 640;
-    private final float FRICTION = 100;
+    private final float FRICTION = 70;
     private final float AIR_RESISTANCE = 50;
 
     private Vector2f vel = new Vector2f(0, 0);
@@ -43,6 +45,9 @@ public class Ball2 extends Instance {
 
     public void update(double delta) {
 
+        if (Keyboard.isKeyDown(GLFW.GLFW_KEY_SPACE))
+            System.out.println("------");
+
         shift((float) (vel.getX() * delta), (float) (vel.getY() * delta));
 
 
@@ -50,59 +55,21 @@ public class Ball2 extends Instance {
 
         Vector3f point = checkCollision();
 
+        vel.move(0, (float) (-GRAVITY * delta));
+
 
         if (point != null) {
-            //setPosition((float) (point.getX() + (width / 2) * Math.cos(point.getZ())), (float) (point.getY() + (width / 2) * Math.sin(point.getZ())));
-/*
-            if (Math.abs(Math.tan(point.getZ()) * vel.getX()) < Math.abs(vel.getY()))
-                vel.setY((float) Math.tan(point.getZ()) * vel.getX());
-            else {
-                vel.setX((float) (vel.getY() / Math.tan(point.getZ())));
+
+            if (vel.getAngle() < point.getZ()) {
+                Vector2f normal = new Vector2f((float) (vel.magnitude() * Math.sin(point.getZ() - vel.getAngle())), (double) point.getZ() + Math.PI / 2);
+                vel.add(normal);
+            } else {
             }
-*/
+            System.out.println(vel.getAngle() + "; " + point.getZ());
 
-            //vel.setAngle(point.getZ());
-
-            vel.setAngle(-1.1127044);
-
-            System.out.println(point.getZ());
-            System.out.println(vel.getAngle());
-
-            System.out.println(point.getZ() - vel.getAngle());
-            System.out.println((-vel.getY() * Math.sin(point.getZ() - vel.getAngle())));
-            System.out.println("--");
-
-            applyForce((float) (-vel.getY() * Math.sin(point.getZ() - vel.getAngle()) * delta), point.getZ());
-
-
-
-/*
-            float force = Math.abs((float) (Math.sin(point.getZ()) * -GRAVITY * delta));
-
-            if (point.getZ() < 0) {
-                applyForce(force, point.getZ());
-            }
-            else {
-                applyForce(-force, point.getZ());
-            }
-            */
-        } else {
-            vel.move(0, (float) (-GRAVITY * delta));
+            vel.resize((float) (-FRICTION * delta));
 
         }
-/*
-
-        System.out.println("velx: " + vel.getX());
-        System.out.println("vely: " + vel.getY());
-        System.out.println("------------");
-
-*/
-
-    }
-
-    private void applyForce(float force, double angle) {
-
-        vel.move((float) (force * Math.cos(angle)), (float) (force * Math.sin(angle)));
 
     }
 

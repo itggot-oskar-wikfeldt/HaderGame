@@ -39,13 +39,13 @@ public class Level {
         ball2 = new Ball2(this, 150, 1000);
 
         for (int i = 0; i < function.length / 2; i++) {
-            function[i] = Math.pow(2, (double) -0.01 * i + 10) + 150;
+            function[i] = Math.pow(2, (double) -0.01 * i + 10) + 230;
             gradient[i] = -7.1 * Math.pow(Math.E, -0.007 * i);
         }
 
         for (int i = function.length / 2; i < function.length; i++) {
-            function[i] = 150 * Math.cos((float) i / 100) + 200;
-            gradient[i] = -1.5 * Math.sin((float) i / 100);
+            function[i] = 150 * Math.sin((float) i / 150) + 200;
+            gradient[i] = Math.cos((float) i / 150);
         }
 
         mouseButtonListener = new MouseButtonListener() {
