@@ -2,10 +2,8 @@ package me.hsogge.hadergame.state;
 
 import me.hsogge.hadergame.component.TextInput;
 import me.hsogge.hadergame.component.TextInputListener;
-import me.hsogge.hadergame.level.Level;
 import se.wiklund.haderengine.Engine;
 import se.wiklund.haderengine.State;
-import se.wiklund.haderengine.graphics.Texture;
 import se.wiklund.haderengine.ui.EnabledUIComponents;
 import se.wiklund.haderengine.ui.UIButton;
 import se.wiklund.haderengine.ui.listener.UIButtonListener;
@@ -24,8 +22,8 @@ public class Settings extends State {
 
     UIButtonListener buttonListener;
 
-    public static String function = "1080 * pow(0.995, x) + 230";
-    public static String gradient = "1080 * log(0.995) * pow(0.995, x)";
+    public static String function = "1080 * pow(0.99, x) + 230";
+    public static String gradient = "1080 * log(0.99) * pow(0.99, x)";
 
     public Settings(Engine engine) {
         EnabledUIComponents.disableAll();
@@ -36,8 +34,8 @@ public class Settings extends State {
         int numOfButtons = 3;
         int startY = engine.HEIGHT / 2 + (numOfButtons * BTN_HEIGHT / 2 + (numOfButtons-1)*BTN_MARGIN/2);
 
-        funcInput = new TextInput(function, FONT, 48, new Texture(0xFF0588a9), centerX, startY-BTN_HEIGHT, BTN_WIDTH, BTN_HEIGHT);
-        gradInput = new TextInput(gradient, FONT, 48, new Texture(0xFF0588a9), centerX, startY - (BTN_HEIGHT + BTN_MARGIN)-BTN_HEIGHT, BTN_WIDTH, BTN_HEIGHT);
+        funcInput = new TextInput(function, FONT, 48, COLOR_NORMAL, centerX, startY-BTN_HEIGHT, BTN_WIDTH, BTN_HEIGHT);
+        gradInput = new TextInput(gradient, FONT, 48, COLOR_NORMAL, centerX, startY - (BTN_HEIGHT + BTN_MARGIN)-BTN_HEIGHT, BTN_WIDTH, BTN_HEIGHT);
         TextInputListener textInputListener = textInput -> {
             if (textInput == funcInput)
                 function = funcInput.getText();
@@ -45,7 +43,7 @@ public class Settings extends State {
                 gradient = gradInput.getText();
         };
 
-        buttonBack = new UIButton("Back", FONT, 48, new Texture(0xFFa90505), centerX, startY - 2*(BTN_HEIGHT + BTN_MARGIN)-BTN_HEIGHT, BTN_WIDTH, BTN_HEIGHT);
+        buttonBack = new UIButton("Back", FONT, 48, COLOR_BAD, centerX, startY - 2*(BTN_HEIGHT + BTN_MARGIN)-BTN_HEIGHT, BTN_WIDTH, BTN_HEIGHT);
 
         buttonListener = new UIButtonListener() {
             @Override
@@ -86,5 +84,7 @@ public class Settings extends State {
         buttonBack.render();
         funcInput.render();
         gradInput.render();
+
+        LBL_POWEREDBY.render();
     }
 }

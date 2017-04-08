@@ -1,8 +1,5 @@
 package me.hsogge.hadergame.math;
 
-/**
- * Created by oskar.wikfeldt on 2017-03-27.
- */
 public class Vector2f {
 
     private float x, y;
@@ -79,6 +76,10 @@ public class Vector2f {
             return Math.atan(y / x);
         else
             return Math.PI + Math.atan(y / x);
+    }
+
+    public double distance(Vector2f vector2f) {
+        return Math.sqrt(Math.pow(x - vector2f.getX(), 2) + Math.pow(y - vector2f.getY(), 2));
     }
 
     public float getX() {

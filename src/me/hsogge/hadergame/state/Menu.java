@@ -6,7 +6,6 @@ import me.hsogge.hadergame.Style;
 import org.lwjgl.opengl.GL11;
 import se.wiklund.haderengine.Engine;
 import se.wiklund.haderengine.State;
-import se.wiklund.haderengine.graphics.Texture;
 import se.wiklund.haderengine.ui.EnabledUIComponents;
 import se.wiklund.haderengine.ui.UIButton;
 import se.wiklund.haderengine.ui.UILabel;
@@ -24,7 +23,6 @@ public class Menu extends State {
     UIButton btnQuit;
 
     UILabel title = new UILabel("hsogge game", Style.FONT_BLACK, 128, engine.WIDTH / 2, engine.HEIGHT - 128, true);
-    UILabel poweredBy = new UILabel("Powered by HaderEngine", Style.FONT_BLACK, 48, 64, 64, false);
 
     public Menu(Engine engine) {
         EnabledUIComponents.disableAll();
@@ -32,9 +30,9 @@ public class Menu extends State {
         this.engine = engine;
         int centerX = engine.WIDTH / 2 - BTN_WIDTH/2;
         int centerY = engine.HEIGHT / 2;
-        btnPlay = new UIButton("Play", FONT, 48, new Texture(0xFF05a937), centerX, centerY + BTN_HEIGHT/2 + BTN_MARGIN, BTN_WIDTH, BTN_HEIGHT);
-        btnSettings = new UIButton("Settings", FONT, 48, new Texture(0xFF0588a9), centerX, centerY - BTN_HEIGHT/2, BTN_WIDTH, BTN_HEIGHT);
-        btnQuit = new UIButton("Quit", FONT, 48, new Texture(0xFFa90505), centerX, centerY - BTN_HEIGHT/2 - BTN_MARGIN - BTN_HEIGHT, BTN_WIDTH, BTN_HEIGHT);
+        btnPlay = new UIButton("Play", FONT, 48, COLOR_GOOD, centerX, centerY + BTN_HEIGHT/2 + BTN_MARGIN, BTN_WIDTH, BTN_HEIGHT);
+        btnSettings = new UIButton("Settings", FONT, 48, COLOR_NORMAL, centerX, centerY - BTN_HEIGHT/2, BTN_WIDTH, BTN_HEIGHT);
+        btnQuit = new UIButton("Quit", FONT, 48, COLOR_BAD, centerX, centerY - BTN_HEIGHT/2 - BTN_MARGIN - BTN_HEIGHT, BTN_WIDTH, BTN_HEIGHT);
         buttonListener = new UIButtonListener() {
             @Override
             public void onButtonDown(UIButton uiButton, int i) {
@@ -61,9 +59,6 @@ public class Menu extends State {
         btnPlay.update(v);
         btnSettings.update(v);
         btnQuit.update(v);
-
-        title.update(v);
-        poweredBy.update(v);
     }
 
     @Override
@@ -74,6 +69,6 @@ public class Menu extends State {
         btnQuit.render();
 
         title.render();
-        poweredBy.render();
+        LBL_POWEREDBY.render();
     }
 }

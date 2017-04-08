@@ -11,6 +11,7 @@ import se.wiklund.haderengine.graphics.Texture;
 import se.wiklund.haderengine.input.Cursor;
 import se.wiklund.haderengine.input.Mouse;
 import se.wiklund.haderengine.input.MouseButtonListener;
+import se.wiklund.haderengine.ui.EnabledUIComponents;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -29,9 +30,10 @@ public class Level {
     private boolean mouseIsDown;
 
     public Level(Engine engine) {
+        EnabledUIComponents.disableAll();
 
         this.engine = engine;
-        ball = new Ball(this, 150, 1000);
+        ball = new Ball(this, 150, 1000, 32);
 
         //placeFunction(0, function.length / 2, "pow(2, -0.01 * x + 10) + 230", "-7.1 * pow(e, -0.007 * x)");
         //placeFunction(function.length / 2, function.length, "200 * -cos(x / 150) + 230 + 200", "2 * sin(x / 150) / 1.5");

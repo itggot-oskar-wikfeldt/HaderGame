@@ -13,7 +13,7 @@ import se.wiklund.haderengine.ui.UILabel;
 public class Loading extends State {
 
     Engine engine;
-    UILabel label = new UILabel("loading...", Style.FONT, 64, engine.WIDTH / 2, engine.HEIGHT / 2, true);
+    UILabel label = new UILabel("loading...", Style.FONT_BLACK, 64, engine.WIDTH / 2, engine.HEIGHT / 2, true);
 
     public Loading(Engine engine) {
         EnabledUIComponents.disableAll();
@@ -29,11 +29,11 @@ public class Loading extends State {
     public void update(double v) {
         timePassed += v;
 
-        if (timePassed > 3 || true)
+        if (timePassed > 1)
             engine.setState(new Game(engine));
 
         counter += v;
-        if (counter > 0.5) {
+        if (counter > 0.2) {
             if (dots == 0) {
                 label.setText("loading" + ".");
                 dots++;

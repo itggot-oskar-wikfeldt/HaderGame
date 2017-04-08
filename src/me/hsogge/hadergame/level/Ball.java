@@ -13,7 +13,7 @@ import java.util.List;
 public class Ball extends Instance {
 
     private Level level;
-    private float width, height;
+    private int radius;
     private Vector2f position;
 
     private Circle circle;
@@ -24,21 +24,19 @@ public class Ball extends Instance {
 
     private Vector2f vel = new Vector2f(0, 0);
 
-    Ball(Level level, float x, float y) {
-        super(new Texture("/ball.png"), x, y, 64, 64);
+    Ball(Level level, float x, float y, int radius) {
+        super(new Texture("/ball.png"), x, y, radius * 2, radius * 2);
 
         position = new Vector2f(x, y);
 
-        this.width = this.height = 64;
+        this.radius = radius;
 
-        this.circle = new Circle(position.getX(), position.getY(), 32);
+        this.circle = new Circle(position.getX(), position.getY(), radius);
 
         this.level = level;
     }
 
     public void update(double delta) {
-
-        System.out.println(vel.getX() + "; " + vel.getY());
 
         shift((float) (vel.getX() * delta), (float) (vel.getY() * delta));
 
@@ -47,7 +45,8 @@ public class Ball extends Instance {
         Vector3f point = checkCollision();
 
         if (point != null)
-            position.move((float) (Math.cos(point.getZ() + Math.PI / 2) * 0.5), (float) (Math.sin(point.getZ() + Math.PI / 2) * 0.5));
+            if (point.getVector2f().distance(circle.getPosition()) < radius - 1)
+                position.move((float) (Math.cos(point.getZ() + Math.PI / 2)), (float) (Math.sin(point.getZ() + Math.PI / 2)));
 
         vel.move(0, (float) (-GRAVITY * delta));
 
@@ -70,9 +69,9 @@ public class Ball extends Instance {
 
         List<Vector3f> intersectingPoints = new ArrayList<>();
 
-        if (!(position.getX() - width / 2 < level.getLimits()[0] || position.getX() + width / 2 >= level.getLimits()[1])) {
+        if (!(position.getX() - radius < level.getLimits()[0] || position.getX() + radius >= level.getLimits()[1])) {
 
-            for (int x = (int) (position.getX() - width / 2); x < position.getX() + width / 2; x++) {
+            for (int x = (int) (position.getX() - radius); x < position.getX() + radius; x++) {
                 Vector3f point = new Vector3f(x, (int) level.getHeight(x), 0);
 
                 if (point.getVector2f().intersects(circle)) {
@@ -115,6 +114,6 @@ public class Ball extends Instance {
     }
 
     private void updatePosition() {
-        getTransform().setPosition(position.getX() - width / 2, position.getY() - height / 2);
+        getTransform().setPosition(position.getX() - radius, position.getY() - radius);
     }
 }
