@@ -1,10 +1,8 @@
 package me.hsogge.hadergame.component;
 
-import me.hsogge.hadergame.Style;
-import org.apache.commons.lang3.StringUtils;
 import org.lwjgl.glfw.GLFW;
 import se.wiklund.haderengine.graphics.Texture;
-import se.wiklund.haderengine.input.Keyboard;
+import se.wiklund.haderengine.maths.Transform;
 import se.wiklund.haderengine.ui.UIButton;
 import se.wiklund.haderengine.ui.UIFont;
 import se.wiklund.haderengine.ui.UILabel;
@@ -16,12 +14,13 @@ public class TextInput extends UIButton {
     Texture selectedTexture = new Texture(0xFF00ccff);
     Texture deselectedTexture;
 
-    public TextInput(String text, UIFont font, float fontSize, Texture background, float x, float y, int width, int height) {
-        super("", font, fontSize, background, x, y, width, height);
+    public TextInput(String text, UIFont font, int fontSize, Texture background, Transform transform) {
+        super("", font, fontSize, background, transform);
 
         deselectedTexture = background;
 
-        label = new UILabel(text, font, fontSize, x + width/2, y+height/2, true);
+        label = new UILabel(text, font, fontSize, transform.getWidth() / 2, transform.getHeight() / 2, true);
+        addSubview(label);
 
     }
 
@@ -33,61 +32,94 @@ public class TextInput extends UIButton {
 
     public void select() {
         selected = true;
-        setTexture(selectedTexture, true);
+        setTexture(selectedTexture, false);
     }
 
     public void deselect() {
         selected = false;
-        setTexture(deselectedTexture, true);
+        setTexture(deselectedTexture, false);
     }
 
-    public void update(double delta) {
-        super.update(delta);
+    private void insertLetter(String letter) {
+        label.setText(new StringBuilder(label.getText()).insert(label.getText().length()-position, letter).toString());
+    }
+
+    private boolean shiftIsDown;
+    private int position = 0;
+
+    @Override
+    public void onKeyDown(int key) {
+        super.onKeyDown(key);
+
+        if (key == GLFW.GLFW_KEY_LEFT_SHIFT) {
+            shiftIsDown = true;
+            return;
+        }
 
         if (selected) {
 
-            if (Keyboard.isKeyPressed(GLFW.GLFW_KEY_BACKSPACE) && label.getText().length() > 0)
-                label.setText(label.getText().substring(0,label.getText().length()-1));
-
-            for (int i = 0; i < 100; i++) {
-                if (Keyboard.isKeyPressed(i)) {
-                    String key = GLFW.glfwGetKeyName(i, 0);
-
-                    System.out.println(i);
-
-                    if (i == GLFW.GLFW_KEY_SPACE)
-                        label.setText(label.getText() + " ");
-                    else if (key != null) {
-                        if (Keyboard.isKeyDown(GLFW.GLFW_KEY_LEFT_SHIFT)) switch (i) {
-                            case GLFW.GLFW_KEY_8:
-                                label.setText(label.getText() + "(");
-                                break;
-                            case GLFW.GLFW_KEY_9:
-                                label.setText(label.getText() + ")");
-                                break;
-                            case GLFW.GLFW_KEY_BACKSLASH:
-                                label.setText(label.getText() + "*");
-                                break;
-                            default:
-                                label.setText(label.getText() + key);
-                                break;
-                        }
-                        else
-                            label.setText(label.getText() + key.toLowerCase());
-                    }
-                }
+            if (key == GLFW.GLFW_KEY_BACKSPACE && label.getText().length() > 0 && label.getText().length() - position > 0) {
+                label.setText(new StringBuilder(label.getText()).deleteCharAt(label.getText().length()-position-1).toString());
+                return;
             }
 
-            if (Keyboard.isKeyPressed(GLFW.GLFW_KEY_ENTER)) {
+            if (key == GLFW.GLFW_KEY_ENTER) {
                 listener.onEnter(this);
                 deselect();
+                return;
+            }
+
+            if (key == GLFW.GLFW_KEY_LEFT) {
+                position += 1;
+                if (getText().length() - position < 0)
+                    position = getText().length();
+                return;
+            } else if (key == GLFW.GLFW_KEY_RIGHT) {
+                position -= 1;
+                if (position < 0)
+                    position = 0;
+                return;
+            }
+
+            String keyStr = GLFW.glfwGetKeyName(key, 0);
+
+            if (key == GLFW.GLFW_KEY_SPACE) {
+                insertLetter(" ");
+                return;
+            } else if (keyStr != null) {
+                if (shiftIsDown) switch (key) {
+                    case GLFW.GLFW_KEY_8:
+                        insertLetter("(");
+                        return;
+                    case GLFW.GLFW_KEY_9:
+                        insertLetter(")");
+                        return;
+                    case GLFW.GLFW_KEY_BACKSLASH:
+                        insertLetter("*");
+                        return;
+                    case GLFW.GLFW_KEY_RIGHT_BRACKET:
+                        insertLetter("^");
+                        return;
+                    default:
+                        insertLetter(keyStr);
+                        return;
+                }
+                else
+                    insertLetter(keyStr.toLowerCase());
+
             }
         }
     }
 
-    public void render() {
-        super.render();
-        label.render();
+    @Override
+    public void onKeyUp(int key) {
+        super.onKeyUp(key);
+        if (key == GLFW.GLFW_KEY_LEFT_SHIFT)
+            shiftIsDown = false;
+    }
+
+    public void update(float delta) {
+        super.update(delta);
     }
 
     public String getText() {

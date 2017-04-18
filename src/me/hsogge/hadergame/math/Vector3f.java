@@ -6,14 +6,11 @@ package me.hsogge.hadergame.math;
 public class Vector3f {
 
     private float x, y, z;
-    private Vector2f vector2f;
 
     public Vector3f(float x, float y, float z) {
         this.x = x;
         this.y = y;
         this.z = z;
-
-        vector2f = new Vector2f(x, y);
     }
 
     public void setPos(float x, float y, float z) {
@@ -23,7 +20,7 @@ public class Vector3f {
     }
 
     public Vector2f getVector2f() {
-        return vector2f;
+        return new Vector2f(x, y);
     }
 
     public float getX() {

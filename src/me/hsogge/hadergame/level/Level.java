@@ -1,121 +1,130 @@
 package me.hsogge.hadergame.level;
 
-import bsh.EvalError;
-import bsh.Interpreter;
-import com.sun.deploy.util.ArrayUtil;
-import me.hsogge.hadergame.math.Vector2f;
+import expr.Expr;
+import expr.Parser;
+import expr.SyntaxException;
+import expr.Variable;
+import me.hsogge.hadergame.math.Vector4f;
+import me.hsogge.hadergame.state.Game;
 import me.hsogge.hadergame.state.Settings;
-import se.wiklund.haderengine.Engine;
-import se.wiklund.haderengine.graphics.Renderer;
+import org.lwjgl.glfw.GLFW;
+import se.wiklund.haderengine.View;
 import se.wiklund.haderengine.graphics.Texture;
 import se.wiklund.haderengine.input.Cursor;
-import se.wiklund.haderengine.input.Mouse;
-import se.wiklund.haderengine.input.MouseButtonListener;
-import se.wiklund.haderengine.ui.EnabledUIComponents;
+import se.wiklund.haderengine.input.InputEnabledViews;
+import se.wiklund.haderengine.maths.Transform;
 
+import java.awt.*;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
-import static java.lang.Math.*;
+public class Level extends View {
 
-public class Level {
+    private List<Ball> balls = new ArrayList<>();
 
-    private Ball ball;
-    private Texture texture = new Texture(0xFF0aafde);
-    private double[] function = new double[1920];
-    private double[] gradient = new double[1920];
-    private double[] texHeight = new double[1920];
-    private Engine engine;
+    private List<Vector4f> points = new ArrayList<>();
+
+    private Texture lineTexture = new Texture(0xdd0aafde);
+
+    private final int SIZE;
+    private final int LINE_THICKNESS = 5;
+    private Game game;
+
     private boolean mouseIsDown;
 
-    public Level(Engine engine) {
-        EnabledUIComponents.disableAll();
+    public Level(Game game, int size) {
+        super(new Texture(0xffffffff), new Transform(0, 0, 0, 0));
 
-        this.engine = engine;
-        ball = new Ball(this, 150, 1000, 128);
+        SIZE = size;
 
-        //placeFunction(0, function.length / 2, "pow(2, -0.01 * x + 10) + 230", "-7.1 * pow(e, -0.007 * x)");
-        //placeFunction(function.length / 2, function.length, "200 * -cos(x / 150) + 230 + 200", "2 * sin(x / 150) / 1.5");
+        this.game = game;
 
-        placeFunction(0, function.length / 2, Settings.function, Settings.gradient);
-        placeFunction(function.length / 2, function.length, "200 * -cos(x / 150) + 230 + 200", "2 * sin(x / 150) / 1.5");
+        balls.add(new Ball(this, 150, 1000, 16));
 
-        MouseButtonListener mouseButtonListener = new MouseButtonListener() {
-            @Override
-            public void onMouseButtonDown(int i) {
-                mouseIsDown = true;
+        for (Ball ball : balls)
+            addSubview(ball);
 
-            }
 
-            @Override
-            public void onMouseButtonUp(int i) {
-                mouseIsDown = false;
+        if (!Settings.Data.functions.isEmpty()) {
+            for (Settings.Function function : Settings.Data.functions)
+                placeFunction(function.getMin(), function.getMax(), function.getFunction());
 
-            }
-        };
-
-        Mouse.addMouseButtonListener(mouseButtonListener);
-
-    }
-
-    public void placeFunction(int min, int max, String functionString, String gradientString) {
-        Interpreter interpreter = new Interpreter();
-        functionString = functionString.replaceAll("pow", "Math.pow").replaceAll("sin", "Math.sin")
-                .replaceAll("cos", "Math.cos").replaceAll("tan", "Math.tan").replaceAll("e", "Math.E")
-                .replaceAll("log", "Math.log");
-        gradientString = gradientString.replaceAll("pow", "Math.pow").replaceAll("sin", "Math.sin")
-                .replaceAll("cos", "Math.cos").replaceAll("tan", "Math.tan").replaceAll("e", "Math.E")
-                .replaceAll("log", "Math.log");
-
-        for (int i = min; i < max; i++) {
-
-            double functionResult = 0;
-            double gradientResult = 0;
-            String localFunction = functionString.replaceAll("x", "(float) " + Integer.toString(i));
-            String localGradient = gradientString.replaceAll("x", "(float) " + Integer.toString(i));
-            try {
-                interpreter.eval("result = " + localFunction);
-                functionResult = (double) interpreter.get("result");
-                interpreter.eval("result = " + localGradient);
-                gradientResult = (double) interpreter.get("result");
-            } catch (EvalError evalError) {
-                evalError.printStackTrace();
-            }
-            function[i] = functionResult;
-            gradient[i] = gradientResult;
-            texHeight[i] = Math.cos(Math.atan(gradient[i]));
+            for (Vector4f point : points)
+                addSubview(new View(lineTexture, new Transform(point.getX(), point.getY(), 1, (int) (-LINE_THICKNESS / point.getA()))));
         }
+
+        addSubview(new View(new Texture(0x88000000), new Transform(-SIZE, 0, SIZE * 2, 1)));
+        addSubview(new View(new Texture(0x88000000), new Transform(0, -SIZE, 1, SIZE * 2)));
+
+        //getTransform().move(-SIZE, SIZE);
+
+        InputEnabledViews.setEnabled(this);
     }
 
-    public void update(double delta) {
+    public void placeFunction(int min, int max, String functionString) {
+        Expr function = null;
+        try {
+            function = Parser.parse(functionString);
+        } catch (SyntaxException e) {
+            System.err.println(e.explain());
+        }
+
+        if (function == null)
+            return;
+
+        Variable x = Variable.make("x");
+
+        List<Vector4f> tempPoints = new ArrayList<>();
+
+        for (int i = min; i <= max; i++) {
+            x.setValue(i);
+
+            Vector4f point = new Vector4f(i, (float) function.value(), 0, -LINE_THICKNESS);
+
+            if (i != min) {
+                point.setZ((point.getY() - tempPoints.get((i - min) - 1).getY()) / (point.getX() - tempPoints.get((i - min) - 1).getX()));
+                point.setA((float) Math.cos(Math.atan(point.getZ())));
+            }
+
+            tempPoints.add(point);
+
+        }
+
+        points.addAll(tempPoints);
+    }
+
+    @Override
+    public void onMouseButtonDown(int button) {
+        super.onMouseButtonDown(button);
+
+        if (button == GLFW.GLFW_MOUSE_BUTTON_1)
+            mouseIsDown = true;
+    }
+
+    @Override
+    public void onMouseButtonUp(int button) {
+        super.onMouseButtonUp(button);
+        if (button == GLFW.GLFW_MOUSE_BUTTON_1)
+            mouseIsDown = false;
+    }
+
+    public void update(float delta) {
 
         if (mouseIsDown) {
-            ball.setPosition(Cursor.getTransform().getX(), Cursor.getTransform().getY());
-            ball.stop();
+            for (Ball ball : balls) {
+                ball.setPosition(Cursor.getTransform().getX() - game.getOffsetX(), Cursor.getTransform().getY() - game.getOffsetY());
+                ball.stop();
+            }
         }
-
-        ball.update(delta);
-    }
-
-    public void render() {
-        for (int i = 0; i < function.length; i++) {
-            Renderer.render(texture, i, (float) function[i], 1, (float) (-5 / texHeight[i]));
-        }
-
-        ball.render();
+        for (Ball ball : balls)
+            ball.update(delta);
     }
 
     int[] getLimits() {
-        return new int[]{0, function.length};
+        return new int[]{-SIZE, SIZE};
     }
 
-    double getHeight(int x) {
-        return function[x];
+    public List<Vector4f> getPoints() {
+        return points;
     }
-
-    double getGradient(int x) {
-        return gradient[x];
-    }
-
 }

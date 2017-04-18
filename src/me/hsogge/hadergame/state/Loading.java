@@ -3,22 +3,19 @@ package me.hsogge.hadergame.state;
 import me.hsogge.hadergame.Style;
 import se.wiklund.haderengine.Engine;
 import se.wiklund.haderengine.State;
-import se.wiklund.haderengine.graphics.Renderer;
-import se.wiklund.haderengine.ui.EnabledUIComponents;
+import se.wiklund.haderengine.input.InputEnabledViews;
 import se.wiklund.haderengine.ui.UILabel;
 
-/**
- * Created by oskar.wikfeldt on 2017-03-24.
- */
 public class Loading extends State {
-
+    UILabel label = new UILabel("loading...", Style.FONT_BLACK, 64, Engine.WIDTH / 2, Engine.HEIGHT / 2, true);
     Engine engine;
-    UILabel label = new UILabel("loading...", Style.FONT_BLACK, 64, engine.WIDTH / 2, engine.HEIGHT / 2, true);
 
     public Loading(Engine engine) {
-        EnabledUIComponents.disableAll();
-
+        InputEnabledViews.disableAll();
         this.engine = engine;
+
+        addSubview(label);
+
     }
 
     int dots = 0;
@@ -26,13 +23,13 @@ public class Loading extends State {
     double timePassed = 0;
 
     @Override
-    public void update(double v) {
-        timePassed += v;
+    public void update(float delta) {
+        timePassed += delta;
 
-        if (timePassed > 1)
+        if (timePassed > 0)
             engine.setState(new Game(engine));
 
-        counter += v;
+        counter += delta;
         if (counter > 0.2) {
             if (dots == 0) {
                 label.setText("loading" + ".");
@@ -46,11 +43,6 @@ public class Loading extends State {
             }
             counter = 0;
         }
-        label.update(v);
-    }
-
-    @Override
-    public void render() {
-        label.render();
+        label.update(delta);
     }
 }

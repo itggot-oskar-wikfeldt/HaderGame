@@ -3,29 +3,31 @@ package me.hsogge.hadergame.level;
 import me.hsogge.hadergame.math.Circle;
 import me.hsogge.hadergame.math.Vector2f;
 import me.hsogge.hadergame.math.Vector3f;
-import org.jetbrains.annotations.Nullable;
-import se.wiklund.haderengine.Instance;
+import me.hsogge.hadergame.math.Vector4f;
+import se.wiklund.haderengine.View;
 import se.wiklund.haderengine.graphics.Texture;
+import se.wiklund.haderengine.maths.Transform;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Ball extends Instance {
+
+public class Ball extends View {
 
     private Level level;
-    private int radius;
+    private float radius;
     private Vector2f position;
 
     private Circle circle;
 
     private final float GRAVITY = 640;
-    private final float FRICTION = 70;
+    private final float FRICTION = 80;
     private final float AIR_RESISTANCE = 30;
 
     private Vector2f vel = new Vector2f(0, 0);
 
-    Ball(Level level, float x, float y, int radius) {
-        super(new Texture("/ball.png"), x, y, radius * 2, radius * 2);
+    Ball(Level level, float x, float y, float radius) {
+        super(new Texture("/ball.png"), new Transform(x, y, (int) radius * 2, (int) radius * 2));
 
         position = new Vector2f(x, y);
 
@@ -36,9 +38,10 @@ public class Ball extends Instance {
         this.level = level;
     }
 
-    public void update(double delta) {
+    public void update(float delta) {
 
-        shift((float) (vel.getX() * delta), (float) (vel.getY() * delta));
+
+        shift(vel.getX() * delta, vel.getY() * delta);
 
         circle.getPosition().setPos(position.getX(), position.getY());
 
@@ -48,7 +51,7 @@ public class Ball extends Instance {
             if (point.getVector2f().distance(circle.getPosition()) < radius - 1)
                 position.move((float) (Math.cos(point.getZ() + Math.PI / 2)), (float) (Math.sin(point.getZ() + Math.PI / 2)));
 
-        vel.move(0, (float) (-GRAVITY * delta));
+        vel.move(0, -GRAVITY * delta);
 
         if (point != null) {
 
@@ -58,29 +61,34 @@ public class Ball extends Instance {
                 Vector2f normal = new Vector2f((float) (vel.magnitude() * Math.sin(point.getZ() - velAngle)), (double) point.getZ() + Math.PI / 2);
                 vel = vel.add(normal);
             }
-            vel.resize((float) (-FRICTION * delta));
+            vel.resize(-FRICTION * delta);
         } else {
-            vel.resize((float) (-AIR_RESISTANCE * delta));
+            vel.resize(-AIR_RESISTANCE * delta);
         }
     }
 
-    @Nullable
     private Vector3f checkCollision() {
 
         List<Vector3f> intersectingPoints = new ArrayList<>();
 
         if (!(position.getX() - radius < level.getLimits()[0] || position.getX() + radius >= level.getLimits()[1])) {
 
-            for (int x = (int) (position.getX() - radius); x < position.getX() + radius; x++) {
-                Vector3f point = new Vector3f(x, (int) level.getHeight(x), 0);
+            for (Vector4f point : level.getPoints()) {
+
+                if (!(point.getX() - (radius + 5) < position.getX() && point.getX() + (radius + 5) > position.getX() && point.getY() - (radius + 5) < position.getY() && point.getY() + (radius + 5) > position.getY()))
+                    continue;
+
+                Vector3f newPoint;
 
                 if (point.getVector2f().intersects(circle)) {
 
-                    point.setZ((float) Math.atan(level.getGradient((int) point.getX())));
+                    newPoint = point.getVector3f();
+                    newPoint.setZ((float) Math.atan(newPoint.getZ()));
 
-                    intersectingPoints.add(point);
+                    intersectingPoints.add(newPoint);
 
                 }
+
             }
             if (!intersectingPoints.isEmpty())
                 return intersectingPoints.get(intersectingPoints.size() / 2);
@@ -91,6 +99,22 @@ public class Ball extends Instance {
 
     }
 
+    private boolean growing;
+
+    private void shapeShift() {
+        if (growing) {
+            setRadius(radius + 0.5f);
+            shift(0, 0.25f);
+            if (radius > 180)
+                growing = false;
+        } else {
+            setRadius(radius - 0.5f);
+            shift(0, -0.25f);
+            if (radius < 8)
+                growing = true;
+        }
+    }
+
     void shift(float dx, float dy) {
         setPosition(position.getX() + dx, position.getY() + dy);
     }
@@ -99,6 +123,16 @@ public class Ball extends Instance {
         position.setPos(x, y);
 
         updatePosition();
+    }
+
+    void setRadius(float radius) {
+        this.radius = radius;
+        circle.setRadius(radius);
+        getTransform().setSize((int) radius * 2, (int) radius * 2);
+    }
+
+    float getRadius() {
+        return radius;
     }
 
     void setPosition(Vector2f position) {

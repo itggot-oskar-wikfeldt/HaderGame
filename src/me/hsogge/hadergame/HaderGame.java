@@ -1,7 +1,7 @@
 package me.hsogge.hadergame;
 
-import me.hsogge.hadergame.state.Game;
 import me.hsogge.hadergame.state.Menu;
+import me.hsogge.hadergame.state.Settings;
 import se.wiklund.haderengine.Engine;
 
 public class HaderGame {
