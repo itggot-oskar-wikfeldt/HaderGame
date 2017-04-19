@@ -119,8 +119,8 @@ public class Settings extends State {
     }
 
     private void addExampleFunctions() {
-        functionInputs.add(new FunctionInput(new String[]{"750 * 0.99^x + 231", "0", "960"}, functionInputs.size()));
-        functionInputs.add(new FunctionInput(new String[]{"200 * -cos(x / 150) + 430", "960", "1920"}, functionInputs.size()));
+        functionInputs.add(new FunctionInput(new String[]{"750 * 0.99^x + 231", "-100", "960"}, functionInputs.size()));
+        functionInputs.add(new FunctionInput(new String[]{"200 * -cos(x / 150) + 430", "960", "3000"}, functionInputs.size()));
         addSubview(functionInputs.get(functionInputs.size() - 1));
         addSubview(functionInputs.get(functionInputs.size() - 2));
     }

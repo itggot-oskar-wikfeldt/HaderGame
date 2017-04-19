@@ -11,40 +11,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f249d320-5062-4403-9a4a-53dbbdd0fd9f" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/me/hsogge/hadergame/math/Vector4f.java" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/LWJGL.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/LWJGL.zip" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/bsh-2.0b4.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/commons-lang3-3.5-bin.zip" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/commons-lang3-3.5.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/HaderGame/me/hsogge/hadergame/level/Level$1.class" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/HaderEngine.jar" afterPath="$PROJECT_DIR$/lib/HaderEngine.jar" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/artifacts/HaderGame_jar/HaderGame.jar" afterPath="$PROJECT_DIR$/out/artifacts/HaderGame_jar/HaderGame.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/HaderGame/me/hsogge/hadergame/Style.class" afterPath="$PROJECT_DIR$/out/production/HaderGame/me/hsogge/hadergame/Style.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/HaderGame/me/hsogge/hadergame/component/TextInput.class" afterPath="$PROJECT_DIR$/out/production/HaderGame/me/hsogge/hadergame/component/TextInput.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/HaderGame/me/hsogge/hadergame/level/Ball.class" afterPath="$PROJECT_DIR$/out/production/HaderGame/me/hsogge/hadergame/level/Ball.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/HaderGame/me/hsogge/hadergame/level/Level.class" afterPath="$PROJECT_DIR$/out/production/HaderGame/me/hsogge/hadergame/level/Level.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/HaderGame/me/hsogge/hadergame/math/Vector3f.class" afterPath="$PROJECT_DIR$/out/production/HaderGame/me/hsogge/hadergame/math/Vector3f.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/HaderGame/me/hsogge/hadergame/state/Game.class" afterPath="$PROJECT_DIR$/out/production/HaderGame/me/hsogge/hadergame/state/Game.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/HaderGame/me/hsogge/hadergame/state/Loading.class" afterPath="$PROJECT_DIR$/out/production/HaderGame/me/hsogge/hadergame/state/Loading.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/HaderGame/me/hsogge/hadergame/state/Menu$1.class" afterPath="$PROJECT_DIR$/out/production/HaderGame/me/hsogge/hadergame/state/Menu$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/HaderGame/me/hsogge/hadergame/state/Menu.class" afterPath="$PROJECT_DIR$/out/production/HaderGame/me/hsogge/hadergame/state/Menu.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/HaderGame/me/hsogge/hadergame/state/Settings$1.class" afterPath="$PROJECT_DIR$/out/production/HaderGame/me/hsogge/hadergame/state/Settings$1.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/HaderGame/me/hsogge/hadergame/state/Settings.class" afterPath="$PROJECT_DIR$/out/production/HaderGame/me/hsogge/hadergame/state/Settings.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/artifacts/HaderGame_jar.xml" afterPath="$PROJECT_DIR$/.idea/artifacts/HaderGame_jar.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/HaderGame.iml" afterPath="$PROJECT_DIR$/HaderGame.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/me/hsogge/hadergame/HaderGame.java" afterPath="$PROJECT_DIR$/src/me/hsogge/hadergame/HaderGame.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/me/hsogge/hadergame/Style.java" afterPath="$PROJECT_DIR$/src/me/hsogge/hadergame/Style.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/me/hsogge/hadergame/component/TextInput.java" afterPath="$PROJECT_DIR$/src/me/hsogge/hadergame/component/TextInput.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/me/hsogge/hadergame/component/TextInputListener.java" afterPath="$PROJECT_DIR$/src/me/hsogge/hadergame/component/TextInputListener.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/me/hsogge/hadergame/level/Ball.java" afterPath="$PROJECT_DIR$/src/me/hsogge/hadergame/level/Ball.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/me/hsogge/hadergame/level/Level.java" afterPath="$PROJECT_DIR$/src/me/hsogge/hadergame/level/Level.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/me/hsogge/hadergame/math/Vector2f.java" afterPath="$PROJECT_DIR$/src/me/hsogge/hadergame/math/Vector2f.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/me/hsogge/hadergame/math/Vector3f.java" afterPath="$PROJECT_DIR$/src/me/hsogge/hadergame/math/Vector3f.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/me/hsogge/hadergame/state/Game.java" afterPath="$PROJECT_DIR$/src/me/hsogge/hadergame/state/Game.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/me/hsogge/hadergame/state/Loading.java" afterPath="$PROJECT_DIR$/src/me/hsogge/hadergame/state/Loading.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/me/hsogge/hadergame/state/Menu.java" afterPath="$PROJECT_DIR$/src/me/hsogge/hadergame/state/Menu.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/me/hsogge/hadergame/state/Settings.java" afterPath="$PROJECT_DIR$/src/me/hsogge/hadergame/state/Settings.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -64,7 +33,7 @@
       <file leaf-file-name="Level.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/me/hsogge/hadergame/level/Level.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="398">
+            <state relative-caret-position="323">
               <caret line="35" column="36" lean-forward="false" selection-start-line="35" selection-start-column="36" selection-end-line="35" selection-end-column="36" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -76,7 +45,7 @@
       <file leaf-file-name="Game.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/me/hsogge/hadergame/state/Game.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="313">
+            <state relative-caret-position="527">
               <caret line="38" column="54" lean-forward="false" selection-start-line="38" selection-start-column="54" selection-end-line="38" selection-end-column="54" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -88,7 +57,7 @@
       <file leaf-file-name="HaderGame.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/me/hsogge/hadergame/HaderGame.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
+            <state relative-caret-position="153">
               <caret line="11" column="45" lean-forward="false" selection-start-line="11" selection-start-column="45" selection-end-line="11" selection-end-column="45" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -151,8 +120,8 @@
       <file leaf-file-name="Settings.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/me/hsogge/hadergame/state/Settings.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="226">
-              <caret line="41" column="70" lean-forward="false" selection-start-line="41" selection-start-column="70" selection-end-line="41" selection-end-column="70" />
+            <state relative-caret-position="260">
+              <caret line="121" column="59" lean-forward="false" selection-start-line="121" selection-start-column="59" selection-end-line="121" selection-end-column="59" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -173,7 +142,7 @@
       <file leaf-file-name="Vector2f.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/me/hsogge/hadergame/math/Vector2f.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
+            <state relative-caret-position="102">
               <caret line="7" column="19" lean-forward="false" selection-start-line="7" selection-start-column="19" selection-end-line="7" selection-end-column="19" />
               <folding>
                 <element signature="e#107#108#0" expanded="true" />
@@ -186,7 +155,7 @@
       <file leaf-file-name="Ball.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/me/hsogge/hadergame/level/Ball.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="391">
+            <state relative-caret-position="238">
               <caret line="23" column="37" lean-forward="false" selection-start-line="23" selection-start-column="37" selection-end-line="23" selection-end-column="37" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -281,8 +250,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -454,6 +421,8 @@
         </subPane>
       </pane>
       <pane id="Scratches" />
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -934,11 +903,12 @@
       <workItem from="1492107580396" duration="7530000" />
       <workItem from="1492123959006" duration="1224000" />
       <workItem from="1492148347513" duration="3669000" />
+      <workItem from="1492534475023" duration="1893000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="125326000" />
+    <option name="totallyTimeSpent" value="127219000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -951,10 +921,10 @@
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3065539" sideWeight="0.5625" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3065539" sideWeight="0.56458336" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3065539" sideWeight="0.4375" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3065539" sideWeight="0.43541667" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1247,7 +1217,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/me/hsogge/hadergame/math/Vector2f.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
+        <state relative-caret-position="102">
           <caret line="7" column="19" lean-forward="false" selection-start-line="7" selection-start-column="19" selection-end-line="7" selection-end-column="19" />
           <folding>
             <element signature="e#107#108#0" expanded="true" />
@@ -1258,7 +1228,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/me/hsogge/hadergame/HaderGame.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
+        <state relative-caret-position="153">
           <caret line="11" column="45" lean-forward="false" selection-start-line="11" selection-start-column="45" selection-end-line="11" selection-end-column="45" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -1268,7 +1238,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/me/hsogge/hadergame/state/Game.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="313">
+        <state relative-caret-position="527">
           <caret line="38" column="54" lean-forward="false" selection-start-line="38" selection-start-column="54" selection-end-line="38" selection-end-column="54" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -1278,7 +1248,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/me/hsogge/hadergame/level/Ball.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
+        <state relative-caret-position="238">
           <caret line="23" column="37" lean-forward="false" selection-start-line="23" selection-start-column="37" selection-end-line="23" selection-end-column="37" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -1290,7 +1260,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/me/hsogge/hadergame/level/Level.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="398">
+        <state relative-caret-position="323">
           <caret line="35" column="36" lean-forward="false" selection-start-line="35" selection-start-column="36" selection-end-line="35" selection-end-column="36" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -1300,8 +1270,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/me/hsogge/hadergame/state/Settings.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="226">
-          <caret line="41" column="70" lean-forward="false" selection-start-line="41" selection-start-column="70" selection-end-line="41" selection-end-column="70" />
+        <state relative-caret-position="260">
+          <caret line="121" column="59" lean-forward="false" selection-start-line="121" selection-start-column="59" selection-end-line="121" selection-end-column="59" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
