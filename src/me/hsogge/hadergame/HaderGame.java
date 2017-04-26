@@ -9,7 +9,7 @@ public class HaderGame {
     public static Engine engine;
 
     public static void main(String[] args) {
-        engine = new Engine("HaderGame", true, true);
+        engine = new Engine("HaderGame", false, true);
         engine.setState(new Menu(engine));
         engine.start();
     }

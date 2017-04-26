@@ -39,7 +39,7 @@ public class Level extends View {
 
         this.game = game;
 
-        balls.add(new Ball(this, 150, 1000, 16));
+        balls.add(new Ball(this, 150, 1000, 32));
 
         for (Ball ball : balls)
             addSubview(ball);
@@ -53,8 +53,8 @@ public class Level extends View {
                 addSubview(new View(lineTexture, new Transform(point.getX(), point.getY(), 1, (int) (-LINE_THICKNESS / point.getA()))));
         }
 
-        addSubview(new View(new Texture(0x88000000), new Transform(-SIZE, 0, SIZE * 2, 1)));
-        addSubview(new View(new Texture(0x88000000), new Transform(0, -SIZE, 1, SIZE * 2)));
+        addSubview(new View(new Texture(0x88000000), new Transform(-SIZE, 0, SIZE * 2, 2)));
+        addSubview(new View(new Texture(0x88000000), new Transform(0, -SIZE, 2, SIZE * 2)));
 
         //getTransform().move(-SIZE, SIZE);
 
@@ -76,13 +76,15 @@ public class Level extends View {
 
         List<Vector4f> tempPoints = new ArrayList<>();
 
-        for (int i = min; i <= max; i++) {
-            x.setValue(i);
+        for (int i = min * 82; i <= max * 82; i++) {
+            x.setValue(i / 82f);
 
-            Vector4f point = new Vector4f(i, (float) function.value(), 0, -LINE_THICKNESS);
+            System.out.println(i);
 
-            if (i != min) {
-                point.setZ((point.getY() - tempPoints.get((i - min) - 1).getY()) / (point.getX() - tempPoints.get((i - min) - 1).getX()));
+            Vector4f point = new Vector4f(i, (float) function.value() * 82, 0, -LINE_THICKNESS);
+
+            if (i != min * 82) {
+                point.setZ((point.getY() - tempPoints.get((i - min * 82) - 1).getY()) / (point.getX() - tempPoints.get((i - min * 82) - 1).getX()));
                 point.setA((float) Math.cos(Math.atan(point.getZ())));
             }
 

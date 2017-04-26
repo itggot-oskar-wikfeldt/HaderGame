@@ -86,8 +86,8 @@ public class Game extends State {
     }
 
     private float vel = 10f;
-    private float offsetX = 0;
-    private float offsetY = 0;
+    private float offsetX = 256;
+    private float offsetY = 256;
 
     private float lastMouseX;
     private float lastMouseY;
