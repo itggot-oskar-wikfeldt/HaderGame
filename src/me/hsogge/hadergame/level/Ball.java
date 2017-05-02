@@ -40,6 +40,7 @@ public class Ball extends View {
 
     public void update(float delta) {
 
+        shapeShift();
 
         shift(vel.getX() * delta, vel.getY() * delta);
 

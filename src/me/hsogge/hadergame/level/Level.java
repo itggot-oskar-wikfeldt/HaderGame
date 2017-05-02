@@ -39,7 +39,7 @@ public class Level extends View {
 
         this.game = game;
 
-        balls.add(new Ball(this, 150, 1000, 32));
+        balls.add(new Ball(this, 150, 700, 32));
 
         for (Ball ball : balls)
             addSubview(ball);
@@ -78,27 +78,19 @@ public class Level extends View {
 
         for (int i = min * 82; i <= max * 82; i++) {
             x.setValue(i / 82f);
-
-            System.out.println(i);
-
             Vector4f point = new Vector4f(i, (float) function.value() * 82, 0, -LINE_THICKNESS);
-
             if (i != min * 82) {
                 point.setZ((point.getY() - tempPoints.get((i - min * 82) - 1).getY()) / (point.getX() - tempPoints.get((i - min * 82) - 1).getX()));
                 point.setA((float) Math.cos(Math.atan(point.getZ())));
             }
-
             tempPoints.add(point);
-
         }
-
         points.addAll(tempPoints);
     }
 
     @Override
     public void onMouseButtonDown(int button) {
         super.onMouseButtonDown(button);
-
         if (button == GLFW.GLFW_MOUSE_BUTTON_1)
             mouseIsDown = true;
     }
