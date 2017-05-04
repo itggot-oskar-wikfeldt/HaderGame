@@ -11,9 +11,8 @@ import se.wiklund.haderengine.input.InputEnabledViews;
 
 public class Game extends State {
 
-    Engine engine;
-
-    Level level;
+    private Engine engine;
+    private Level level;
 
     public Game(Engine engine) {
         InputEnabledViews.disableAll();
@@ -26,7 +25,7 @@ public class Game extends State {
 
     }
 
-    boolean mouse3IsDown;
+    private boolean mouse3IsDown;
 
     @Override
     public void onMouseButtonDown(int button) {
@@ -50,10 +49,11 @@ public class Game extends State {
 
     }
 
-    boolean rightIsDown;
-    boolean leftIsDown;
-    boolean upIsDown;
-    boolean downIsDown;
+    private boolean rightIsDown;
+    private boolean leftIsDown;
+    private boolean upIsDown;
+    private boolean downIsDown;
+    private boolean fIsDown;
 
     @Override
     public void onKeyDown(int key) {
@@ -68,6 +68,9 @@ public class Game extends State {
             upIsDown = true;
         else if (key == GLFW.GLFW_KEY_DOWN || key == GLFW.GLFW_KEY_S)
             downIsDown = true;
+        else if (key == GLFW.GLFW_KEY_F)
+            fIsDown = true;
+
     }
 
     @Override
@@ -82,10 +85,12 @@ public class Game extends State {
             upIsDown = false;
         else if (key == GLFW.GLFW_KEY_DOWN || key == GLFW.GLFW_KEY_S)
             downIsDown = false;
+        else if (key == GLFW.GLFW_KEY_F)
+            fIsDown = false;
 
     }
 
-    private float vel = 10f;
+    private float vel = 15f;
     private float offsetX = 256;
     private float offsetY = 256;
 
@@ -94,15 +99,26 @@ public class Game extends State {
 
     @Override
     public void update(float delta) {
+        level.update(delta);
 
-        if (rightIsDown)
-            offsetX -= vel;
-        if (leftIsDown)
-            offsetX += vel;
-        if (upIsDown)
-            offsetY -= vel;
-        if (downIsDown)
-            offsetY += vel;
+        if (fIsDown) {
+            offsetX = -level.getBalls().get(0).getTransform().getX() + Engine.WIDTH / 2;
+            offsetY = -level.getBalls().get(0).getTransform().getY() + Engine.HEIGHT / 2;
+        } else {
+
+            if (rightIsDown) {
+                offsetX -= vel;
+            }
+            if (leftIsDown) {
+                offsetX += vel;
+            }
+            if (upIsDown) {
+                offsetY -= vel;
+            }
+            if (downIsDown) {
+                offsetY += vel;
+            }
+        }
 
         if (mouse3IsDown) {
 
@@ -118,7 +134,6 @@ public class Game extends State {
         }
 
         level.getTransform().setPosition(offsetX, offsetY);
-        level.update(delta);
     }
 
     public float getOffsetX() {

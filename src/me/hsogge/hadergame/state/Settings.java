@@ -119,8 +119,8 @@ public class Settings extends State {
     }
 
     private void addExampleFunctions() {
-        functionInputs.add(new FunctionInput(new String[]{"0.1 * (x - 10)^2", "0", "10"}, functionInputs.size()));
-        functionInputs.add(new FunctionInput(new String[]{"-2 * cos(0.5 * (x-10)) + 2", "10", "40"}, functionInputs.size()));
+        functionInputs.add(new FunctionInput(new String[]{"0.1 * (x - 10)^2 - 2", "-5", "10"}, functionInputs.size()));
+        functionInputs.add(new FunctionInput(new String[]{"-2 * cos(0.5 * (x-10))", "10", "40"}, functionInputs.size()));
         addSubview(functionInputs.get(functionInputs.size() - 1));
         addSubview(functionInputs.get(functionInputs.size() - 2));
     }

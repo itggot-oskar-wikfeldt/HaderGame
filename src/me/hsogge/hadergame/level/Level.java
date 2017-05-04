@@ -121,4 +121,8 @@ public class Level extends View {
     public List<Vector4f> getPoints() {
         return points;
     }
+
+    public List<Ball> getBalls() {
+        return balls;
+    }
 }

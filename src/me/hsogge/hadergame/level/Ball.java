@@ -40,19 +40,18 @@ public class Ball extends View {
 
     public void update(float delta) {
 
-        shapeShift();
-
-        shift(vel.getX() * delta, vel.getY() * delta);
+        move(vel.getX() * delta, vel.getY() * delta);
+        vel.move(0, -GRAVITY * delta);
 
         circle.getPosition().setPos(position.getX(), position.getY());
 
         Vector3f point = checkCollision();
 
-        if (point != null)
-            if (point.getVector2f().distance(circle.getPosition()) < radius - 1)
-                position.move((float) (Math.cos(point.getZ() + Math.PI / 2)), (float) (Math.sin(point.getZ() + Math.PI / 2)));
-
-        vel.move(0, -GRAVITY * delta);
+        if (point != null) {
+            double distance = point.getVector2f().distance(circle.getPosition());
+            if (distance < radius - 1)
+                position.move((float) (-(distance - radius)*(Math.cos(point.getZ() + Math.PI / 2))), (float) (-(distance - radius)*(Math.sin(point.getZ() + Math.PI / 2))));
+        }
 
         if (point != null) {
 
@@ -66,6 +65,7 @@ public class Ball extends View {
         } else {
             vel.resize(-AIR_RESISTANCE * delta);
         }
+
     }
 
     private Vector3f checkCollision() {
@@ -105,18 +105,18 @@ public class Ball extends View {
     private void shapeShift() {
         if (growing) {
             setRadius(radius + 0.5f);
-            shift(0, 0.25f);
+            move(0, 0.25f);
             if (radius > 180)
                 growing = false;
         } else {
             setRadius(radius - 0.5f);
-            shift(0, -0.25f);
+            move(0, -0.25f);
             if (radius < 8)
                 growing = true;
         }
     }
 
-    void shift(float dx, float dy) {
+    void move(float dx, float dy) {
         setPosition(position.getX() + dx, position.getY() + dy);
     }
 
