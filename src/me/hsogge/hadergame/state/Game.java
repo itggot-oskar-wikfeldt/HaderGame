@@ -1,5 +1,6 @@
 package me.hsogge.hadergame.state;
 
+import me.hsogge.hadergame.Style;
 import me.hsogge.hadergame.level.Level;
 import me.hsogge.hadergame.math.Vector2f;
 import org.lwjgl.glfw.GLFW;
@@ -8,6 +9,10 @@ import se.wiklund.haderengine.Engine;
 import se.wiklund.haderengine.State;
 import se.wiklund.haderengine.input.Cursor;
 import se.wiklund.haderengine.input.InputEnabledViews;
+import se.wiklund.haderengine.ui.UILabel;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Game extends State {
 

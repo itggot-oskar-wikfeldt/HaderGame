@@ -4,6 +4,7 @@ import expr.Expr;
 import expr.Parser;
 import expr.SyntaxException;
 import expr.Variable;
+import me.hsogge.hadergame.Style;
 import me.hsogge.hadergame.math.Vector4f;
 import me.hsogge.hadergame.state.Game;
 import me.hsogge.hadergame.state.Settings;
@@ -13,6 +14,7 @@ import se.wiklund.haderengine.graphics.Texture;
 import se.wiklund.haderengine.input.Cursor;
 import se.wiklund.haderengine.input.InputEnabledViews;
 import se.wiklund.haderengine.maths.Transform;
+import se.wiklund.haderengine.ui.UILabel;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -56,9 +58,27 @@ public class Level extends View {
         addSubview(new View(new Texture(0x88000000), new Transform(-SIZE, 0, SIZE * 2, 2)));
         addSubview(new View(new Texture(0x88000000), new Transform(0, -SIZE, 2, SIZE * 2)));
 
-        //getTransform().move(-SIZE, SIZE);
+        addCoordinateLabel(1000);
 
         InputEnabledViews.setEnabled(this);
+    }
+
+    private void addCoordinateLabel(int iters) {
+
+        int fontSize = 28;
+        int margin = 4;
+
+        for (int i = 0; i < iters; i+= 5) {
+            addSubview(new UILabel(Integer.toString(i), Style.FONT_COORD, fontSize, i * 82, -fontSize-margin, true));
+            addSubview(new UILabel(Integer.toString(i), Style.FONT_COORD, fontSize, 0 -fontSize-margin, i * 82, true));
+
+            if (i != 0) {
+                addSubview(new UILabel(Integer.toString(-i), Style.FONT_COORD, fontSize, -i * 82, 0, false));
+                addSubview(new UILabel(Integer.toString(-i), Style.FONT_COORD, fontSize, 0, -i * 82, false));
+            }
+
+        }
+
     }
 
     public void placeFunction(int min, int max, String functionString) {
