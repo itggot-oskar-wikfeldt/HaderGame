@@ -1,30 +1,25 @@
 package me.hsogge.hadergame.state;
 
-import me.hsogge.hadergame.Style;
 import me.hsogge.hadergame.level.Level;
-import me.hsogge.hadergame.math.Vector2f;
 import org.lwjgl.glfw.GLFW;
-import org.lwjgl.opengl.GL11;
 import se.wiklund.haderengine.Engine;
 import se.wiklund.haderengine.State;
 import se.wiklund.haderengine.input.Cursor;
 import se.wiklund.haderengine.input.InputEnabledViews;
-import se.wiklund.haderengine.ui.UILabel;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class Game extends State {
 
     private Engine engine;
     private Level level;
 
-    public Game(Engine engine) {
+    public Game(Engine engine, Level level) {
+
         InputEnabledViews.disableAll();
 
         this.engine = engine;
+        this.level = level;
 
-        level = new Level(this, 19200);
+        level.setGame(this);
 
         addSubview(level);
 
@@ -148,4 +143,5 @@ public class Game extends State {
     public float getOffsetY() {
         return offsetY;
     }
+
 }
