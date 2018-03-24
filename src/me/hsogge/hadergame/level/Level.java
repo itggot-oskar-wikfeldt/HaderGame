@@ -36,12 +36,10 @@ public class Level extends View {
 
     private boolean mouseIsDown;
 
-    public Level(Game game, int size) {
+    public Level(int size) {
         super(new Texture(0xffffffff), new Transform(0, 0, 0, 0));
 
         SIZE = size;
-
-        this.game = game;
 
         balls.add(new Ball(this, 150, 700, 32));
 
@@ -60,17 +58,11 @@ public class Level extends View {
         addSubview(new View(new Texture(0x88000000), new Transform(-SIZE, 0, SIZE * 2, 2)));
         addSubview(new View(new Texture(0x88000000), new Transform(0, -SIZE, 2, SIZE * 2)));
 
-        addCoordinateLabel(1000);
-
-        InputEnabledViews.setEnabled(this);
-    }
-
-    private void addCoordinateLabel(int iters) {
-
         int fontSize = 28;
         int margin = 4;
 
-        for (int i = 0; i < iters; i+= 5) {
+        for (int i = 0; i < 1000; i+= 5) {
+
             addSubview(new UILabel(Integer.toString(i), Style.FONT_COORD, fontSize, i * 82, -fontSize-margin, true));
             addSubview(new UILabel(Integer.toString(i), Style.FONT_COORD, fontSize, 0 -fontSize-margin, i * 82, true));
 
@@ -81,6 +73,8 @@ public class Level extends View {
 
         }
 
+
+        InputEnabledViews.setEnabled(this);
     }
 
     public void placeFunction(int min, int max, String functionString) {
@@ -146,5 +140,9 @@ public class Level extends View {
 
     public List<Ball> getBalls() {
         return balls;
+    }
+
+    public void setGame(Game game) {
+        this.game = game;
     }
 }
