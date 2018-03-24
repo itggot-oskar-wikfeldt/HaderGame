@@ -14,22 +14,21 @@ import java.util.List;
 
 public class Ball extends View {
 
-    private Level level;
-    private float radius;
-    private Vector2f position;
-
-    private Circle circle;
-
-    private final float GRAVITY = 640;
     private final float FRICTION = 80;
     private final float AIR_RESISTANCE = 30;
 
-    private Vector2f vel = new Vector2f(0, 0);
+    private Level level;
+
+    private float radius;
+    private Circle circle;
+    private Vector2f position;
+    private Vector2f vel;
 
     Ball(Level level, float x, float y, float radius) {
         super(new Texture("/ball.png"), new Transform(x, y, (int) radius * 2, (int) radius * 2));
 
         position = new Vector2f(x, y);
+        vel = new Vector2f(0, 0);
 
         this.radius = radius;
 
@@ -41,7 +40,7 @@ public class Ball extends View {
     public void update(float delta) {
 
         move(vel.getX() * delta, vel.getY() * delta);
-        vel.move(0, -GRAVITY * delta);
+        vel.move(0, -level.GRAVITY * delta);
 
         circle.getPosition().setPos(position.getX(), position.getY());
 

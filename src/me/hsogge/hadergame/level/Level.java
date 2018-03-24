@@ -28,6 +28,8 @@ public class Level extends View {
 
     private Texture lineTexture = new Texture(0xdd0aafde);
 
+    public final float GRAVITY = 640;
+
     private final int SIZE;
     private final int LINE_THICKNESS = 5;
     private Game game;
