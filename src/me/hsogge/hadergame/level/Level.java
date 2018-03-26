@@ -5,6 +5,7 @@ import expr.Parser;
 import expr.SyntaxException;
 import expr.Variable;
 import me.hsogge.hadergame.Style;
+import me.hsogge.hadergame.math.Vector2f;
 import me.hsogge.hadergame.math.Vector4f;
 import me.hsogge.hadergame.state.Game;
 import me.hsogge.hadergame.state.Settings;
@@ -34,8 +35,6 @@ public class Level extends View {
     private final int LINE_THICKNESS = 5;
     private Game game;
 
-    private boolean mouseIsDown;
-
     public Level(int size) {
         super(new Texture(0xffffffff), new Transform(0, 0, 0, 0));
 
@@ -61,7 +60,7 @@ public class Level extends View {
         int fontSize = 28;
         int margin = 4;
 
-        for (int i = 0; i < 1000; i+= 5) {
+        for (int i = 0; i < 100; i+= 5) {
 
             addSubview(new UILabel(Integer.toString(i), Style.FONT_COORD, fontSize, i * 82, -fontSize-margin, true));
             addSubview(new UILabel(Integer.toString(i), Style.FONT_COORD, fontSize, 0 -fontSize-margin, i * 82, true));
@@ -104,28 +103,37 @@ public class Level extends View {
         points.addAll(tempPoints);
     }
 
-    @Override
-    public void onMouseButtonDown(int button) {
-        super.onMouseButtonDown(button);
-        if (button == GLFW.GLFW_MOUSE_BUTTON_1)
-            mouseIsDown = true;
+    public void moveBall(float x, float y) {
+        for (Ball ball : balls) {
+            ball.setPosition(x - game.getOffsetX(), y - game.getOffsetY());
+            ball.stop();
+        }
     }
 
-    @Override
-    public void onMouseButtonUp(int button) {
-        super.onMouseButtonUp(button);
-        if (button == GLFW.GLFW_MOUSE_BUTTON_1)
-            mouseIsDown = false;
+    public void enlargeBall() {
+        for (Ball ball : balls) {
+            ball.enlarge();
+        }
+    }
+    public void shrinkBall() {
+        for (Ball ball : balls) {
+            ball.shrink();
+        }
+    }
+    public void shapeShift() {
+        for (Ball ball : balls) {
+            ball.toggleShapeShift();
+        }
+    }
+    public void resetBall() {
+        for (Ball ball : balls) {
+            ball.setPosition(150, 700);
+            ball.setRadius(32);
+            ball.setVel(new Vector2f(0,0));
+        }
     }
 
     public void update(float delta) {
-
-        if (mouseIsDown) {
-            for (Ball ball : balls) {
-                ball.setPosition(Cursor.getTransform().getX() - game.getOffsetX(), Cursor.getTransform().getY() - game.getOffsetY());
-                ball.stop();
-            }
-        }
         for (Ball ball : balls)
             ball.update(delta);
     }

@@ -12,9 +12,6 @@ import se.wiklund.haderengine.ui.listener.UIButtonListener;
 
 import static me.hsogge.hadergame.Style.*;
 
-/**
- * Created by oskar.wikfeldt on 2017-03-21.
- */
 public class Menu extends State {
 
     Engine engine;
@@ -65,6 +62,7 @@ public class Menu extends State {
 
     @Override
     public void update(float delta) {
+        GL11.glClearColor(1, 1, 1, 1);
         btnPlay.update(delta);
         btnSettings.update(delta);
         btnQuit.update(delta);

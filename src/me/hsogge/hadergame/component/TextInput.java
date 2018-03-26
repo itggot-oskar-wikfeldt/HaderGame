@@ -44,6 +44,12 @@ public class TextInput extends UIButton {
         label.setText(new StringBuilder(label.getText()).insert(label.getText().length()-position, letter).toString());
     }
 
+    private void removeMarker() {
+        String str = label.getText();
+        str = str.replace("|", "");
+        label.setText(str);
+    }
+
     private boolean shiftIsDown;
     private int position = 0;
 
@@ -58,8 +64,14 @@ public class TextInput extends UIButton {
 
         if (selected) {
 
+            removeMarker();
+            insertLetter("|");
+
             if (key == GLFW.GLFW_KEY_BACKSPACE && label.getText().length() > 0 && label.getText().length() - position > 0) {
-                label.setText(new StringBuilder(label.getText()).deleteCharAt(label.getText().length()-position-1).toString());
+                try {
+                    label.setText(new StringBuilder(label.getText()).deleteCharAt(label.getText().length() - position - 1).toString());
+                    label.setText(new StringBuilder(label.getText()).deleteCharAt(label.getText().length() - position - 1).toString());
+                } catch (StringIndexOutOfBoundsException e) {}
                 return;
             }
 
@@ -71,8 +83,8 @@ public class TextInput extends UIButton {
 
             if (key == GLFW.GLFW_KEY_LEFT) {
                 position += 1;
-                if (getText().length() - position < 0)
-                    position = getText().length();
+                if (label.getText().length() - position < 0)
+                    position = label.getText().length();
                 return;
             } else if (key == GLFW.GLFW_KEY_RIGHT) {
                 position -= 1;
@@ -114,6 +126,12 @@ public class TextInput extends UIButton {
     @Override
     public void onKeyUp(int key) {
         super.onKeyUp(key);
+
+        if (selected) {
+            removeMarker();
+            insertLetter("|");
+        }
+
         if (key == GLFW.GLFW_KEY_LEFT_SHIFT)
             shiftIsDown = false;
     }
@@ -123,6 +141,7 @@ public class TextInput extends UIButton {
     }
 
     public String getText() {
+        removeMarker();
         return label.getText();
     }
 

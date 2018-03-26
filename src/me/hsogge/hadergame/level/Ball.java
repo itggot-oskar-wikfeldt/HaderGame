@@ -14,12 +14,14 @@ import java.util.List;
 
 public class Ball extends View {
 
-    private final float FRICTION = 80;
-    private final float AIR_RESISTANCE = 30;
+    private final float FRICTION = 40;
+    private final float AIR_RESISTANCE = 10;
 
     private Level level;
 
     private float radius;
+    private float minRadius = 8;
+    private float maxRadius = 128;
     private Circle circle;
     private Vector2f position;
     private Vector2f vel;
@@ -38,6 +40,9 @@ public class Ball extends View {
     }
 
     public void update(float delta) {
+
+        if (shapeShift)
+            shapeShift();
 
         move(vel.getX() * delta, vel.getY() * delta);
         vel.move(0, -level.GRAVITY * delta);
@@ -100,18 +105,37 @@ public class Ball extends View {
     }
 
     private boolean growing;
+    private boolean shapeShift = false;
+
+    public void toggleShapeShift() {
+        shapeShift = !shapeShift;
+    }
 
     private void shapeShift() {
         if (growing) {
             setRadius(radius + 0.5f);
             move(0, 0.25f);
-            if (radius > 180)
+            if (radius > maxRadius)
                 growing = false;
         } else {
             setRadius(radius - 0.5f);
             move(0, -0.25f);
-            if (radius < 8)
+            if (radius < minRadius)
                 growing = true;
+        }
+    }
+
+    public void enlarge() {
+        if (radius < maxRadius) {
+            setRadius(radius + 0.5f);
+            move(0, 0.25f);
+        }
+    }
+
+    public void shrink() {
+        if (radius > minRadius) {
+            setRadius(radius - 0.5f);
+            move(0, -0.25f);
         }
     }
 
@@ -131,7 +155,7 @@ public class Ball extends View {
         getTransform().setSize((int) radius * 2, (int) radius * 2);
     }
 
-    float getRadius() {
+    public float getRadius() {
         return radius;
     }
 

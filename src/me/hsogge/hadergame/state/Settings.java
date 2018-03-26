@@ -1,5 +1,6 @@
 package me.hsogge.hadergame.state;
 
+import me.hsogge.hadergame.Style;
 import me.hsogge.hadergame.component.TextInput;
 import me.hsogge.hadergame.component.TextInputListener;
 import org.lwjgl.opengl.GL11;
@@ -10,6 +11,7 @@ import se.wiklund.haderengine.graphics.Texture;
 import se.wiklund.haderengine.input.InputEnabledViews;
 import se.wiklund.haderengine.maths.Transform;
 import se.wiklund.haderengine.ui.UIButton;
+import se.wiklund.haderengine.ui.UILabel;
 import se.wiklund.haderengine.ui.listener.UIButtonListener;
 
 import java.util.ArrayList;
@@ -28,6 +30,8 @@ public class Settings extends State {
     private UIButton pressedButton;
     private UIButton buttonAddStandard;
     private List<FunctionInput> functionInputs = new CopyOnWriteArrayList<>();
+    private UILabel legendFunction;
+    private UILabel legendDomain;
 
     public Settings(Engine engine) {
 
@@ -37,10 +41,14 @@ public class Settings extends State {
 
         this.engine = engine;
 
+        buttonAdd = new UIButton("Add Function", FONT, 48, COLOR_GOOD, new Transform(BTN_MARGIN, Engine.HEIGHT - (BTN_HEIGHT + BTN_MARGIN) - BTN_MARGIN, 256, BTN_HEIGHT));
+        buttonAddStandard = new UIButton("Add ex. Functions", FONT, 40, COLOR_GOOD, new Transform(BTN_MARGIN, Engine.HEIGHT - 2 * (BTN_HEIGHT + BTN_MARGIN) - BTN_MARGIN, 256, BTN_HEIGHT));
+        buttonBack = new UIButton("Back", FONT, 48, COLOR_BAD, new Transform(BTN_MARGIN, Engine.HEIGHT - 3 * (BTN_HEIGHT + BTN_MARGIN) - BTN_MARGIN, 256, BTN_HEIGHT));
 
-        buttonAdd = new UIButton("Add Function", FONT, 48, COLOR_GOOD, new Transform(BTN_MARGIN, Engine.HEIGHT - (BTN_HEIGHT + BTN_MARGIN), 256, BTN_HEIGHT));
-        buttonAddStandard = new UIButton("Add ex. Functions", FONT, 40, COLOR_GOOD, new Transform(BTN_MARGIN, Engine.HEIGHT - 2 * (BTN_HEIGHT + BTN_MARGIN), 256, BTN_HEIGHT));
-        buttonBack = new UIButton("Back", FONT, 48, COLOR_BAD, new Transform(BTN_MARGIN, Engine.HEIGHT - 3 * (BTN_HEIGHT + BTN_MARGIN), 256, BTN_HEIGHT));
+        legendFunction = new UILabel("Function", Style.FONT_BLACK, 64, engine.WIDTH / 2, engine.HEIGHT - 32, true);
+        legendDomain = new UILabel("Domain min/max", Style.FONT_BLACK, 64, engine.WIDTH - 300, engine.HEIGHT - 32, true);
+        addSubview(legendFunction);
+        addSubview(legendDomain);
 
         buttonListener = new UIButtonListener() {
             @Override
@@ -76,6 +84,7 @@ public class Settings extends State {
 
     @Override
     public void update(float delta) {
+        GL11.glClearColor(1, 1, 1, 1);
 
         buttonBack.update(delta);
         buttonAdd.update(delta);
@@ -120,7 +129,7 @@ public class Settings extends State {
 
     private void addExampleFunctions() {
         functionInputs.add(new FunctionInput(new String[]{"0.1 * (x - 10)^2 - 2", "-5", "10"}, functionInputs.size()));
-        functionInputs.add(new FunctionInput(new String[]{"-2 * cos(0.5 * (x-10))", "10", "40"}, functionInputs.size()));
+        functionInputs.add(new FunctionInput(new String[]{"-2 * cos(0.5 * (x - 10))", "10", "40"}, functionInputs.size()));
         addSubview(functionInputs.get(functionInputs.size() - 1));
         addSubview(functionInputs.get(functionInputs.size() - 2));
     }
@@ -136,7 +145,7 @@ public class Settings extends State {
         private List<TextInput> textInputs = new ArrayList<>();
 
         private FunctionInput(String[] premadeVars, int index) {
-            super(new Texture(0x00000000), new Transform(2 * BTN_MARGIN + 256, Engine.HEIGHT - (index + 1) * (BTN_MARGIN + BTN_HEIGHT), Engine.WIDTH - (2 * BTN_MARGIN + 256) - BTN_MARGIN, BTN_HEIGHT));
+            super(new Texture(0x00000000), new Transform(2 * BTN_MARGIN + 256, Engine.HEIGHT - (index + 1) * (BTN_MARGIN + BTN_HEIGHT) - BTN_MARGIN, Engine.WIDTH - (2 * BTN_MARGIN + 256) - BTN_MARGIN, BTN_HEIGHT));
 
             textInputListener = textInput -> {
                 function.setFunction(funcInput.getText());
