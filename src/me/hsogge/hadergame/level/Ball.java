@@ -49,57 +49,65 @@ public class Ball extends View {
 
         circle.getPosition().setPos(position.getX(), position.getY());
 
+        // check if there is a point from graph that the ball touches
         Vector3f point = checkCollision();
 
+        // if the ball touches a point
         if (point != null) {
+            // distance from ball to point
             double distance = point.getVector2f().distance(circle.getPosition());
-            if (distance < radius - 1)
-                position.move((float) (-(distance - radius)*(Math.cos(point.getZ() + Math.PI / 2))), (float) (-(distance - radius)*(Math.sin(point.getZ() + Math.PI / 2))));
-        }
+            // moves the ball outwards along the point's normal so the distance between them is exactly the ball's radius (the ball just barely doesn't touch the point)
+            position.move((float) (-(distance - radius)*(Math.cos(point.getZ() + Math.PI / 2))), (float) (-(distance - radius)*(Math.sin(point.getZ() + Math.PI / 2))));
 
-        if (point != null) {
-
+            // get's the angle which the ball is currently traveling at
             double velAngle = vel.getAngle();
 
+            // adds a vector to the balls velocity which has the angle of the normal of the point that the ball touches
+            // the magnitude of the vector is calculated to make the velocity's angle the same as the point's angle
             if (!(velAngle > point.getZ() && velAngle < point.getZ() + Math.PI)) {
                 Vector2f normal = new Vector2f((float) (vel.magnitude() * Math.sin(point.getZ() - velAngle)), (double) point.getZ() + Math.PI / 2);
                 vel = vel.add(normal);
             }
+            // slows the ball down from friction since the ball is touching something
             vel.resize(-FRICTION * delta);
         } else {
+            // slows the ball down with air resistance since the ball is not touching anything
             vel.resize(-AIR_RESISTANCE * delta);
         }
-
     }
 
     private Vector3f checkCollision() {
 
+        // a list for all the potential points the ball will touch
         List<Vector3f> intersectingPoints = new ArrayList<>();
 
-        if (!(position.getX() - radius < level.getLimits()[0] || position.getX() + radius >= level.getLimits()[1])) {
+        // iterates through all the points in the level
+        for (Vector4f point : level.getPoints()) {
 
-            for (Vector4f point : level.getPoints()) {
+            // checks if the point is within 5 units if the ball, goes to the next point if it isn't
+            if (!(point.getX() - (radius + 5) < position.getX() && point.getX() + (radius + 5) > position.getX() && point.getY() - (radius + 5) < position.getY() && point.getY() + (radius + 5) > position.getY()))
+                continue;
 
-                if (!(point.getX() - (radius + 5) < position.getX() && point.getX() + (radius + 5) > position.getX() && point.getY() - (radius + 5) < position.getY() && point.getY() + (radius + 5) > position.getY()))
-                    continue;
 
-                Vector3f newPoint;
+            // checks if the point is inside the ball
+            if (point.getVector2f().intersects(circle)) {
 
-                if (point.getVector2f().intersects(circle)) {
+                Vector3f newPoint = point.getVector3f();
 
-                    newPoint = point.getVector3f();
-                    newPoint.setZ((float) Math.atan(newPoint.getZ()));
+                // sets the third value of the vector3f to the angle of the point. uses the slope of the point to calculate angle
+                newPoint.setZ((float) Math.atan(newPoint.getZ()));
 
-                    intersectingPoints.add(newPoint);
-
-                }
+                // adds the point to the list of points intersecting with the ball
+                intersectingPoints.add(newPoint);
 
             }
-            if (!intersectingPoints.isEmpty())
-                return intersectingPoints.get(intersectingPoints.size() / 2);
 
         }
+        if (!intersectingPoints.isEmpty())
+            // returns the middle point in the list, since the ball is round, the intersecting point found in the middle will be approximately the point you'll want to use
+            return intersectingPoints.get(intersectingPoints.size() / 2);
 
+        // returns no point if the ball is not intersecting a point'
         return null;
 
     }

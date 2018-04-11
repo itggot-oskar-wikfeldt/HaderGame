@@ -20,7 +20,7 @@ public class Menu extends State {
     UIButton btnSettings;
     UIButton btnQuit;
 
-    UILabel title = new UILabel("hsogge game", Style.FONT_BLACK, 128, engine.WIDTH / 2, engine.HEIGHT - 128, true);
+    UILabel title = new UILabel("function roller", Style.FONT_BLACK, 128, engine.WIDTH / 2, engine.HEIGHT - 128, true);
 
     public Menu(Engine engine) {
         InputEnabledViews.disableAll();
